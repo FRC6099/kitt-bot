@@ -24,4 +24,11 @@ public final class Constants {
  public static final int RIGHT_REAR_DRIVE_MOTOR_CAN_ID = 2;
  public static final int LEFT_FRONT_DRIVE_MOTOR_CAN_ID = 3;
  public static final int LEFT_REAR_DRIVE_MOTOR_CAN_ID = 4;
+
+ // Intake Arm
+ public static final int INTAKE_ARM_MOTOR_CAN_ID = 5;
+public static final int INTAKE_GRABBER_MOTOR_CAN_ID = 6;
+
+/*** Digital IO ***/
+public static final int NOTE_LIMIT_SWITCH = 0;
 }
