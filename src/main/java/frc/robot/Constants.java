@@ -33,6 +33,15 @@ public final class Constants {
     public static final int LEFT_SHOOTER_ARM_MOTOR_CAN_ID = 7;
     public static final int RIGHT_SHOOTER_ARM_MOTOR_CAN_ID = 8;
 
+    // Climber
+    public static final int LEFT_CLIMBER_MOTOR_CAN_ID = 9;
+    public static final int RIGHT_CLIMBER_MOTOR_CAN_ID = 10;
+
+    /*** Relays ***/
+    // Climber
+    public static final int LEFT_CLIMBER_RELAY_ID = 0;
+    public static final int RIGHT_CLIMBER_RELAY_ID = 1;
+
     /*** Digital IO ***/
     public static final int NOTE_LIMIT_SWITCH = 0;
 }
