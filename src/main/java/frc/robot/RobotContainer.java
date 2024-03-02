@@ -12,6 +12,7 @@ import frc.robot.commands.TankDrive;
 import frc.robot.controllers.TankDriveController;
 import frc.robot.subsystems.DriveTrain;
 import frc.robot.subsystems.Intake;
+import frc.robot.subsystems.Shooter;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.CommandJoystick;
@@ -28,6 +29,7 @@ public class RobotContainer {
   // The robot's subsystems and commands are defined here...
   private final DriveTrain driveTrain = new DriveTrain();
   private final Intake intake = new Intake();
+  private final Shooter shooter = new Shooter();
 
   // Replace with CommandPS4Controller or CommandJoystick if needed
   private final CommandXboxController xboxController = new CommandXboxController(Constants.XBOX_CONTROLLER_USB_ID);
@@ -39,7 +41,7 @@ public class RobotContainer {
   private final ExtendIntakeArm extendIntakeArm = new ExtendIntakeArm(intake);
   private final RetractIntakeArm retractIntakeArm = new RetractIntakeArm(intake);
   private final InjectNote injectNote = new InjectNote(intake);
-  private final EjectNote ejectNote = new EjectNote(intake);
+  private final EjectNote ejectNote = new EjectNote(intake, shooter);
 
   // Autonomous Commands
   // Add ability to choose autonomous mode in SmartDashboard

@@ -7,14 +7,17 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.enums.ArmPosition;
 import frc.robot.subsystems.Intake;
+import frc.robot.subsystems.Shooter;
 
 public class EjectNote extends Command {
   private final Intake intake;
+  private final Shooter shooter;
 
   /** Creates a new InjectNote. */
-  public EjectNote(Intake intake) {
+  public EjectNote(Intake intake, Shooter shooter) {
     this.intake = intake;
-    addRequirements(intake);
+    this.shooter = shooter;
+    addRequirements(intake, shooter);
   }
 
   // Called when the command is initially scheduled.
@@ -25,11 +28,10 @@ public class EjectNote extends Command {
   @Override
   public void execute() {
     if (!isFinished()) {
-      boolean isShooterPrimed = true;
-      if (isShooterPrimed) {
+      if (this.shooter.isPrimed()) {
         this.intake.eject();
       }
-      // TODO: this.shooter.prime()
+      this.shooter.prime();
     }
   }
 
@@ -37,7 +39,7 @@ public class EjectNote extends Command {
   @Override
   public void end(boolean interrupted) {
     this.intake.stopIntake();
-    //this.shooter.stop();
+    this.shooter.stop();
   }
 
   // Returns true when the command should end.
