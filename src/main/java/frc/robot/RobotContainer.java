@@ -4,12 +4,14 @@
 
 package frc.robot;
 
-import frc.robot.commands.Autos;
-import frc.robot.commands.ExampleCommand;
+import frc.robot.commands.EjectNote;
+import frc.robot.commands.ExtendIntakeArm;
+import frc.robot.commands.InjectNote;
+import frc.robot.commands.RetractIntakeArm;
 import frc.robot.commands.TankDrive;
 import frc.robot.controllers.TankDriveController;
 import frc.robot.subsystems.DriveTrain;
-import frc.robot.subsystems.ExampleSubsystem;
+import frc.robot.subsystems.Intake;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.CommandJoystick;
@@ -25,6 +27,7 @@ import edu.wpi.first.wpilibj2.command.button.Trigger;
 public class RobotContainer {
   // The robot's subsystems and commands are defined here...
   private final DriveTrain driveTrain = new DriveTrain();
+  private final Intake intake = new Intake();
 
   // Replace with CommandPS4Controller or CommandJoystick if needed
   private final CommandXboxController xboxController = new CommandXboxController(Constants.XBOX_CONTROLLER_USB_ID);
@@ -33,6 +36,10 @@ public class RobotContainer {
 
   // Default commands
   private final TankDrive tankDrive = new TankDrive(driveTrain, new TankDriveController(leftJoystick, rightJoystick));
+  private final ExtendIntakeArm extendIntakeArm = new ExtendIntakeArm(intake);
+  private final RetractIntakeArm retractIntakeArm = new RetractIntakeArm(intake);
+  private final InjectNote injectNote = new InjectNote(intake);
+  private final EjectNote ejectNote = new EjectNote(intake);
 
   // Autonomous Commands
   // Add ability to choose autonomous mode in SmartDashboard
@@ -66,7 +73,10 @@ public class RobotContainer {
     // Schedule `exampleMethodCommand` when the Xbox controller's B button is pressed,
     // cancelling on release.
     // m_driverController.b().whileTrue(m_exampleSubsystem.exampleMethodCommand());
-    xboxController.leftBumper().onTrue(tankDrive);
+    xboxController.leftBumper().whileTrue(extendIntakeArm);
+    xboxController.rightBumper().whileTrue(retractIntakeArm);
+    xboxController.leftTrigger().whileTrue(injectNote);
+    xboxController.rightTrigger().whileTrue(ejectNote);
   }
 
   /**

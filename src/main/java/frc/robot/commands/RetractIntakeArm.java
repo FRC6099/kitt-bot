@@ -5,11 +5,15 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.Command;
+import frc.robot.enums.ArmPosition;
+import frc.robot.subsystems.Intake;
 
-public class OperateArm extends Command {
+public class RetractIntakeArm extends Command {
+  private final Intake intake;
   /** Creates a new OperateArm. */
-  public OperateArm() {
-    // Use addRequirements() here to declare subsystem dependencies.
+  public RetractIntakeArm(Intake intake) {
+    this.intake = intake;
+    addRequirements(intake);
   }
 
   // Called when the command is initially scheduled.
@@ -19,16 +23,20 @@ public class OperateArm extends Command {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    
+    if (!isFinished()) {
+      intake.moveArmBackward(0.5);
+    }
   }
 
   // Called once the command ends or is interrupted.
   @Override
-  public void end(boolean interrupted) {}
+  public void end(boolean interrupted) {
+    intake.stopArm();
+  }
 
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return false;
+    return ArmPosition.HOME == intake.getArmPosition();
   }
 }

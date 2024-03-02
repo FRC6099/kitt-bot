@@ -19,6 +19,8 @@ import frc.robot.enums.ArmPosition;
 
 public class Intake extends SubsystemBase {
 
+  private static final double ARM_VELOCITY = 1.0;
+
   private final CANSparkMax armMotor = new CANSparkMax(Constants.INTAKE_ARM_MOTOR_CAN_ID, MotorType.kBrushless);
   private final SparkPIDController armMotorController = armMotor.getPIDController();
   private final SparkAbsoluteEncoder armEncoder = armMotor.getAbsoluteEncoder();
@@ -60,7 +62,7 @@ public class Intake extends SubsystemBase {
   }
 
   public void moveArm(double speed) {
-    armMotorController.setReference(speed * 10, ControlType.kVelocity);
+    armMotorController.setReference(speed * ARM_VELOCITY, ControlType.kVelocity);
   }
 
   public void stopArm() {
@@ -73,6 +75,10 @@ public class Intake extends SubsystemBase {
 
   public void eject() {
     grabberMotor.set(TalonSRXControlMode.PercentOutput, -0.5);
+  }
+
+  public void stopIntake() {
+    grabberMotor.set(TalonSRXControlMode.PercentOutput, 0.0);
   }
 
   public ArmPosition getArmPosition() {
