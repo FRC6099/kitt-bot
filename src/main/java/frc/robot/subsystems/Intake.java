@@ -77,7 +77,13 @@ public class Intake extends SubsystemBase {
   }
 
   public ArmPosition getArmPosition() {
-    return ArmPosition.HOME;
+    // TODO: Find actual positions
+    if (armEncoder.getPosition() < 100.0) {
+      return ArmPosition.HOME;
+    } else if (armEncoder.getPosition() > 1000.0) {
+      return ArmPosition.EXTENDED;
+    }
+    return ArmPosition.OUT_OF_POSITION;
   }
 
   public boolean isNotePresent() {
