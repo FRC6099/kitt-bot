@@ -4,8 +4,8 @@
 
 package frc.robot.subsystems;
 
-import com.ctre.phoenix.motorcontrol.TalonSRXControlMode;
-import com.ctre.phoenix.motorcontrol.can.TalonSRX;
+import com.ctre.phoenix.motorcontrol.ControlMode;
+import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.SparkAbsoluteEncoder;
 import com.revrobotics.SparkPIDController;
@@ -24,7 +24,7 @@ public class Intake extends SubsystemBase {
   private final CANSparkMax armMotor = new CANSparkMax(Constants.INTAKE_ARM_MOTOR_CAN_ID, MotorType.kBrushless);
   private final SparkPIDController armMotorController = armMotor.getPIDController();
   private final SparkAbsoluteEncoder armEncoder = armMotor.getAbsoluteEncoder();
-  private final TalonSRX grabberMotor = new TalonSRX(Constants.INTAKE_GRABBER_MOTOR_CAN_ID);
+  private final WPI_TalonSRX grabberMotor = new WPI_TalonSRX(Constants.INTAKE_GRABBER_MOTOR_CAN_ID);
   private final DigitalInput noteLimitSwitch = new DigitalInput(Constants.NOTE_LIMIT_SWITCH);
 
   /** Creates a new Intake. */
@@ -70,15 +70,15 @@ public class Intake extends SubsystemBase {
   }
 
   public void inject() {
-    grabberMotor.set(TalonSRXControlMode.PercentOutput, 0.5);
+    grabberMotor.set(ControlMode.PercentOutput, 0.5);
   }
 
   public void eject() {
-    grabberMotor.set(TalonSRXControlMode.PercentOutput, -0.5);
+    grabberMotor.set(ControlMode.PercentOutput, -0.5);
   }
 
   public void stopIntake() {
-    grabberMotor.set(TalonSRXControlMode.PercentOutput, 0.0);
+    grabberMotor.set(ControlMode.PercentOutput, 0.0);
   }
 
   public ArmPosition getArmPosition() {

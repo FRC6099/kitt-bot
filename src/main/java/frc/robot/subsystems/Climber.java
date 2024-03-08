@@ -4,8 +4,8 @@
 
 package frc.robot.subsystems;
 
-import com.ctre.phoenix.motorcontrol.TalonSRXControlMode;
-import com.ctre.phoenix.motorcontrol.can.TalonSRX;
+import com.ctre.phoenix.motorcontrol.ControlMode;
+import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
 import edu.wpi.first.wpilibj.Relay;
 import edu.wpi.first.wpilibj.Relay.Value;
@@ -14,8 +14,8 @@ import frc.robot.Constants;
 
 public class Climber extends SubsystemBase {
 
-  private final TalonSRX leftClimber = new TalonSRX(Constants.LEFT_CLIMBER_MOTOR_CAN_ID);
-  private final TalonSRX rightClimber = new TalonSRX(Constants.RIGHT_CLIMBER_MOTOR_CAN_ID);
+  private final WPI_TalonSRX leftClimber = new WPI_TalonSRX(Constants.LEFT_CLIMBER_MOTOR_CAN_ID);
+  private final WPI_TalonSRX rightClimber = new WPI_TalonSRX(Constants.RIGHT_CLIMBER_MOTOR_CAN_ID);
   private final Relay leftRelay = new Relay(Constants.LEFT_CLIMBER_RELAY_ID);
   private final Relay rightRelay = new Relay(Constants.RIGHT_CLIMBER_RELAY_ID);
   /** Creates a new Climber. */
@@ -28,21 +28,21 @@ public class Climber extends SubsystemBase {
 
   public void moveLeft(double speed) {
     leftRelay.set(Value.kOn);
-    leftClimber.set(TalonSRXControlMode.PercentOutput, speed);
+    leftClimber.set(ControlMode.PercentOutput, speed);
   }
 
   public void moveRight(double speed) {
     rightRelay.set(Value.kOn);
-    rightClimber.set(TalonSRXControlMode.PercentOutput, speed);
+    rightClimber.set(ControlMode.PercentOutput, speed);
   }
 
   public void stopLeft() {
-    leftClimber.set(TalonSRXControlMode.PercentOutput, 0.0);
+    leftClimber.set(ControlMode.PercentOutput, 0.0);
     leftRelay.set(Value.kOff);
   }
 
   public void stopRight() {
-    rightClimber.set(TalonSRXControlMode.PercentOutput, 0.0);
+    rightClimber.set(ControlMode.PercentOutput, 0.0);
     rightRelay.set(Value.kOff);
   }
 }
