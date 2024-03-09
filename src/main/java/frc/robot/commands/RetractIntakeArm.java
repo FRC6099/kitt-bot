@@ -24,7 +24,7 @@ public class RetractIntakeArm extends Command {
   @Override
   public void execute() {
     if (!isFinished()) {
-      intake.moveArmBackward(0.5);
+      intake.moveArm(-0.5);
     }
   }
 
@@ -37,6 +37,7 @@ public class RetractIntakeArm extends Command {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return ArmPosition.HOME == intake.getArmPosition();
+    // return ArmPosition.HOME == intake.getArmPosition();
+    return false;
   }
 }

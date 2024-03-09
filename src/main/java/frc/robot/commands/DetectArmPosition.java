@@ -4,52 +4,42 @@
 
 package frc.robot.commands;
 
-import edu.wpi.first.wpilibj.Timer;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.enums.ArmPosition;
 import frc.robot.subsystems.Intake;
 import frc.robot.subsystems.Shooter;
 
-public class EjectNote extends Command {
+public class DetectArmPosition extends Command {
   private final Intake intake;
   private final Shooter shooter;
-  private final Timer timer = new Timer();
-
-  /** Creates a new InjectNote. */
-  public EjectNote(Intake intake, Shooter shooter) {
+  /** Creates a new DetectArmPosition. */
+  public DetectArmPosition(Intake intake, Shooter shooter) {
+    // Use addRequirements() here to declare subsystem dependencies.
+    addRequirements(intake, shooter);
     this.intake = intake;
     this.shooter = shooter;
-    addRequirements(intake, shooter);
   }
 
   // Called when the command is initially scheduled.
   @Override
-  public void initialize() {
-    timer.reset();
-  }
+  public void initialize() {}
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    if (!isFinished()) {
-      timer.start();
-      if (this.shooter.isPrimed()) {
-        this.intake.eject();
-      }
-      this.shooter.prime();
-    }
+    ArmPosition armPosition = intake.getArmPosition();
+    SmartDashboard.putString("Arm Position", armPosition.name());
+    SmartDashboard.putBoolean("Shooter Ready", ArmPosition.HOME == armPosition && intake.isNotePresent());
   }
 
   // Called once the command ends or is interrupted.
   @Override
-  public void end(boolean interrupted) {
-    this.intake.stopIntake();
-    this.shooter.stop();
-  }
+  public void end(boolean interrupted) {}
 
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return (!this.intake.isNotePresent() || ArmPosition.HOME != this.intake.getArmPosition()) && timer.hasElapsed(5.0);
+    return false;
   }
 }

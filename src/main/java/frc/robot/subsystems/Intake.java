@@ -7,12 +7,15 @@ package frc.robot.subsystems;
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import com.revrobotics.CANSparkMax;
+import com.revrobotics.RelativeEncoder;
 import com.revrobotics.SparkAbsoluteEncoder;
+import com.revrobotics.SparkAnalogSensor;
 import com.revrobotics.SparkPIDController;
 import com.revrobotics.CANSparkBase.ControlType;
 import com.revrobotics.CANSparkLowLevel.MotorType;
 
 import edu.wpi.first.wpilibj.DigitalInput;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 import frc.robot.enums.ArmPosition;
@@ -21,9 +24,9 @@ public class Intake extends SubsystemBase {
 
   private static final double ARM_VELOCITY = 1.0;
 
-  private final CANSparkMax armMotor = new CANSparkMax(Constants.INTAKE_ARM_MOTOR_CAN_ID, MotorType.kBrushless);
+  private final CANSparkMax armMotor = new CANSparkMax(Constants.INTAKE_ARM_MOTOR_CAN_ID, MotorType.kBrushed);
   private final SparkPIDController armMotorController = armMotor.getPIDController();
-  private final SparkAbsoluteEncoder armEncoder = armMotor.getAbsoluteEncoder();
+  private final RelativeEncoder armEncoder = armMotor.getAlternateEncoder(4096);
   private final WPI_TalonSRX grabberMotor = new WPI_TalonSRX(Constants.INTAKE_GRABBER_MOTOR_CAN_ID);
   private final DigitalInput noteLimitSwitch = new DigitalInput(Constants.NOTE_LIMIT_SWITCH);
 
@@ -55,26 +58,30 @@ public class Intake extends SubsystemBase {
 
   public void moveArm(ArmPosition position) {
     if (ArmPosition.HOME == position) {
-      armMotorController.setReference(0, ControlType.kPosition);
+      armMotor.set(0.2);
+      // armMotorController.setReference(0, ControlType.kPosition);
     } else if (ArmPosition.EXTENDED == position) {
+      armMotor.set(-0.2);
       armMotorController.setReference(90, ControlType.kPosition);
     }
   }
 
   public void moveArm(double speed) {
-    armMotorController.setReference(speed * ARM_VELOCITY, ControlType.kVelocity);
+    armMotor.set(speed);
+    // armMotorController.setReference(speed * ARM_VELOCITY, ControlType.kVelocity);
   }
 
   public void stopArm() {
-    armMotorController.setReference(0.0, ControlType.kVoltage);
+    armMotor.set(0.0);
+    // armMotorController.setReference(0.0, ControlType.kVoltage);
   }
 
   public void inject() {
-    grabberMotor.set(ControlMode.PercentOutput, 0.5);
+    grabberMotor.set(ControlMode.PercentOutput, 0.75);
   }
 
   public void eject() {
-    grabberMotor.set(ControlMode.PercentOutput, -0.5);
+    grabberMotor.set(ControlMode.PercentOutput, -0.75);
   }
 
   public void stopIntake() {
@@ -82,6 +89,7 @@ public class Intake extends SubsystemBase {
   }
 
   public ArmPosition getArmPosition() {
+    SmartDashboard.putNumber("Arm ticks", armEncoder.getPosition());
     // TODO: Find actual positions
     if (armEncoder.getPosition() < 100.0) {
       return ArmPosition.HOME;
@@ -92,6 +100,6 @@ public class Intake extends SubsystemBase {
   }
 
   public boolean isNotePresent() {
-    return noteLimitSwitch.get();
+    return !noteLimitSwitch.get();
   }
 }

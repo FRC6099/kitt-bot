@@ -28,15 +28,17 @@ public class Shooter extends SubsystemBase {
 
   public void prime() {
     timer.start();
-    leftShooterMotor.getPIDController().setReference(100.0, ControlType.kVelocity);
-    rightShooterMotor.getPIDController().setReference(100.0, ControlType.kVelocity);
+    leftShooterMotor.set(-0.4);
+    rightShooterMotor.set(0.4);
+    // leftShooterMotor.getPIDController().setReference(3.0, ControlType.kVoltage);
+    // rightShooterMotor.getPIDController().setReference(3.0, ControlType.kVoltage);
   }
 
   public void stop() {
     timer.stop();
     timer.reset();
-    leftShooterMotor.getPIDController().setReference(0.0,ControlType.kVoltage);
-    rightShooterMotor.getPIDController().setReference(0.0,ControlType.kVoltage);
+    leftShooterMotor.set(0.0);
+    rightShooterMotor.set(0.0);
   }
 
   public boolean isPrimed() {

@@ -4,6 +4,7 @@
 
 package frc.robot;
 
+import frc.robot.commands.DetectArmPosition;
 import frc.robot.commands.EjectNote;
 import frc.robot.commands.ExtendIntakeArm;
 import frc.robot.commands.InjectNote;
@@ -21,6 +22,7 @@ import frc.robot.subsystems.Shooter;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.wpilibj2.command.RunCommand;
 import edu.wpi.first.wpilibj2.command.WaitCommand;
 import edu.wpi.first.wpilibj2.command.button.CommandJoystick;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
@@ -51,6 +53,7 @@ public class RobotContainer {
   private final InjectNote injectNote = new InjectNote(intake);
   private final EjectNote ejectNote = new EjectNote(intake, shooter);
   private final OperateClimber operateClimber = new OperateClimber(new ClimberController(xboxController), climber);
+  private final DetectArmPosition detectArmPosition = new DetectArmPosition(intake, shooter);
 
   // Autonomous Commands
   // Add ability to choose autonomous mode in SmartDashboard
@@ -67,6 +70,7 @@ public class RobotContainer {
   private void configureSubsystems() {
     this.driveTrain.setDefaultCommand(tankDrive);
     this.climber.setDefaultCommand(operateClimber);
+    this.intake.setDefaultCommand(detectArmPosition);
   }
 
   private void configureAutonomousModes() {
@@ -98,6 +102,9 @@ public class RobotContainer {
     xboxController.rightBumper().whileTrue(retractIntakeArm);
     xboxController.leftTrigger().whileTrue(injectNote);
     xboxController.rightTrigger().whileTrue(ejectNote);
+    // xboxController.a()
+    // .whileTrue(new RunCommand(() -> shooter.prime(), shooter))
+    // .whileFalse(new RunCommand(() -> shooter.stop(), shooter));
   }
 
   /**
