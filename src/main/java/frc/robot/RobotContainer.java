@@ -10,6 +10,8 @@ import frc.robot.commands.InjectNote;
 import frc.robot.commands.OperateClimber;
 import frc.robot.commands.RetractIntakeArm;
 import frc.robot.commands.TankDrive;
+import frc.robot.commands.autonomous.DriveBackward;
+import frc.robot.commands.autonomous.EjectTwoNoteSequence;
 import frc.robot.controllers.ClimberController;
 import frc.robot.controllers.TankDriveController;
 import frc.robot.subsystems.Climber;
@@ -17,7 +19,9 @@ import frc.robot.subsystems.DriveTrain;
 import frc.robot.subsystems.Intake;
 import frc.robot.subsystems.Shooter;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.wpilibj2.command.WaitCommand;
 import edu.wpi.first.wpilibj2.command.button.CommandJoystick;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
@@ -57,11 +61,20 @@ public class RobotContainer {
     // Configure the trigger bindings
     configureBindings();
     configureSubsystems();
+    configureAutonomousModes();
   }
 
   private void configureSubsystems() {
     this.driveTrain.setDefaultCommand(tankDrive);
     this.climber.setDefaultCommand(operateClimber);
+  }
+
+  private void configureAutonomousModes() {
+    this.autonomousChooser.setDefaultOption("Do nothing", new WaitCommand(10.0));
+    this.autonomousChooser.addOption("Drive Backwards", new DriveBackward(driveTrain));
+    this.autonomousChooser.addOption("Score two notes", new EjectTwoNoteSequence(intake, shooter, driveTrain));
+    SmartDashboard.putData("Autonomous Options", this.autonomousChooser);
+    // SmartDashboard.putNumber("Autonomous Number", 0);
   }
 
   /**
