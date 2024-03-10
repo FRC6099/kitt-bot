@@ -8,17 +8,14 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.enums.ArmPosition;
 import frc.robot.subsystems.Intake;
-import frc.robot.subsystems.Shooter;
 
 public class DetectArmPosition extends Command {
   private final Intake intake;
-  private final Shooter shooter;
   /** Creates a new DetectArmPosition. */
-  public DetectArmPosition(Intake intake, Shooter shooter) {
+  public DetectArmPosition(Intake intake) {
     // Use addRequirements() here to declare subsystem dependencies.
-    addRequirements(intake, shooter);
+    addRequirements(intake);
     this.intake = intake;
-    this.shooter = shooter;
   }
 
   // Called when the command is initially scheduled.
@@ -31,6 +28,7 @@ public class DetectArmPosition extends Command {
     ArmPosition armPosition = intake.getArmPosition();
     SmartDashboard.putString("Arm Position", armPosition.name());
     SmartDashboard.putBoolean("Shooter Ready", ArmPosition.HOME == armPosition && intake.isNotePresent());
+    
   }
 
   // Called once the command ends or is interrupted.

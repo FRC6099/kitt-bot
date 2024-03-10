@@ -8,11 +8,10 @@ import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.RelativeEncoder;
-import com.revrobotics.SparkAbsoluteEncoder;
-import com.revrobotics.SparkAnalogSensor;
 import com.revrobotics.SparkPIDController;
 import com.revrobotics.CANSparkBase.ControlType;
 import com.revrobotics.CANSparkLowLevel.MotorType;
+import com.revrobotics.SparkRelativeEncoder.Type;
 
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -25,14 +24,43 @@ public class Intake extends SubsystemBase {
   private static final double ARM_VELOCITY = 1.0;
 
   private final CANSparkMax armMotor = new CANSparkMax(Constants.INTAKE_ARM_MOTOR_CAN_ID, MotorType.kBrushed);
-  private final SparkPIDController armMotorController = armMotor.getPIDController();
-  private final RelativeEncoder armEncoder = armMotor.getAlternateEncoder(4096);
+  private final SparkPIDController armPID = armMotor.getPIDController();
+  private final RelativeEncoder armEncoder = armMotor.getEncoder(Type.kQuadrature, 2048);
   private final WPI_TalonSRX grabberMotor = new WPI_TalonSRX(Constants.INTAKE_GRABBER_MOTOR_CAN_ID);
   private final DigitalInput noteLimitSwitch = new DigitalInput(Constants.NOTE_LIMIT_SWITCH);
 
   /** Creates a new Intake. */
   public Intake() {
+
+    // Clear out any motor specific settings when controller was first configured
+    armMotor.restoreFactoryDefaults();
+    
+    // armPID.setFeedbackDevice(armEncoder);
+
     // TODO: Configure encoder
+    // Test Controller in REV Hardware Client to detect position to tune settings
+    // PID coefficients
+    //   Proportional = Multiplied with Error to produce motor output
+    //   Integral = Multiplied with Duration Error has occured (keeps motor moving) to produce motor output
+    //   Derivative = Multipled with Change in Error (slope) to produce motor output
+    //   Error = Set point - current value
+    //   FeedForward = Multiplier to maintain velocity
+    // Example: https://github.com/REVrobotics/SPARK-MAX-Examples/blob/master/Java/Encoder%20Feedback%20Device/src/main/java/frc/robot/Robot.java
+    // double kP = 0.1; 
+    // double kI = 0.0001;
+    // double kD = 0.0; 
+    // double kIz = 0.0; 
+    // double kFF = 0.0; 
+    // double kMaxOutput = 0.5; 
+    // double kMinOutput = -0.5;
+
+    // set PID coefficients
+    // armPID.setP(kP);
+    // armPID.setI(kI);
+    // armPID.setD(kD);
+    // armPID.setIZone(kIz);
+    // armPID.setFF(kFF);
+    // armPID.setOutputRange(kMinOutput, kMaxOutput);
   }
 
   @Override
@@ -59,21 +87,21 @@ public class Intake extends SubsystemBase {
   public void moveArm(ArmPosition position) {
     if (ArmPosition.HOME == position) {
       armMotor.set(0.2);
-      // armMotorController.setReference(0, ControlType.kPosition);
+      // armPID.setReference(0, ControlType.kPosition);
     } else if (ArmPosition.EXTENDED == position) {
       armMotor.set(-0.2);
-      armMotorController.setReference(90, ControlType.kPosition);
+      // TODO: Get Actual Position for EXTENDED
+      // armPID.setReference(90, ControlType.kPosition);
     }
   }
 
   public void moveArm(double speed) {
     armMotor.set(speed);
-    // armMotorController.setReference(speed * ARM_VELOCITY, ControlType.kVelocity);
   }
 
   public void stopArm() {
     armMotor.set(0.0);
-    // armMotorController.setReference(0.0, ControlType.kVoltage);
+    // armPID.setReference(0.0, ControlType.kVoltage);
   }
 
   public void inject() {

@@ -15,6 +15,9 @@ public class EjectNote extends Command {
   private final Shooter shooter;
   private final Timer timer = new Timer();
 
+  private boolean wasNotePresent = false;
+  private boolean isTimerStarted = false;
+
   /** Creates a new InjectNote. */
   public EjectNote(Intake intake, Shooter shooter) {
     this.intake = intake;
@@ -25,14 +28,12 @@ public class EjectNote extends Command {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    timer.reset();
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
     if (!isFinished()) {
-      timer.start();
       if (this.shooter.isPrimed()) {
         this.intake.eject();
       }
@@ -45,11 +46,32 @@ public class EjectNote extends Command {
   public void end(boolean interrupted) {
     this.intake.stopIntake();
     this.shooter.stop();
+    this.timer.stop();
+    this.wasNotePresent = false;
+    this.isTimerStarted = false;
   }
 
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return (!this.intake.isNotePresent() || ArmPosition.HOME != this.intake.getArmPosition()) && timer.hasElapsed(5.0);
+    return !this.getWasNotePresent(); // || ArmPosition.HOME != this.intake.getArmPosition();
+  }
+
+  private boolean getWasNotePresent() {
+    if (wasNotePresent && isTimerStarted && timer.hasElapsed(5.0)) {
+      wasNotePresent = false;
+      isTimerStarted = false;
+      timer.stop();
+    }
+
+    if (this.intake.isNotePresent()) {
+      wasNotePresent = true;
+    } else if (wasNotePresent && !isTimerStarted) {
+      isTimerStarted = true;
+      this.timer.reset();
+      timer.start();
+    }
+
+    return wasNotePresent;
   }
 }

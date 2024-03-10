@@ -24,7 +24,7 @@ public class ExtendIntakeArm extends Command {
   @Override
   public void execute() {
     if (!isFinished()) {
-      intake.moveArmForward(0.5);;
+      intake.moveArm(0.5);;
     }
   }
 

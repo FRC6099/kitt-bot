@@ -53,7 +53,7 @@ public class RobotContainer {
   private final InjectNote injectNote = new InjectNote(intake);
   private final EjectNote ejectNote = new EjectNote(intake, shooter);
   private final OperateClimber operateClimber = new OperateClimber(new ClimberController(xboxController), climber);
-  private final DetectArmPosition detectArmPosition = new DetectArmPosition(intake, shooter);
+  private final DetectArmPosition detectArmPosition = new DetectArmPosition(intake);
 
   // Autonomous Commands
   // Add ability to choose autonomous mode in SmartDashboard
