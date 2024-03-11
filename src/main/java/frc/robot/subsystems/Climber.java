@@ -33,7 +33,7 @@ public class Climber extends SubsystemBase {
 
   public void moveRight(double speed) {
     rightRelay.set(Value.kOn);
-    rightClimber.set(ControlMode.PercentOutput, speed);
+    rightClimber.set(ControlMode.PercentOutput, -speed);
   }
 
   public void stopLeft() {
