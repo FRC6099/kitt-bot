@@ -42,6 +42,6 @@ public class Shooter extends SubsystemBase {
   }
 
   public boolean isPrimed() {
-    return timer.hasElapsed(1.0);
+    return timer.hasElapsed(0.333);
   }
 }
