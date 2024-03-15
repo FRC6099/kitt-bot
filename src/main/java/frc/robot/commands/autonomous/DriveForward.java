@@ -47,6 +47,7 @@ public class DriveForward extends Command {
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
+    driveTrain.stop();
     timer.stop();
     System.out.println("** Moving Forward Complete");
   }
