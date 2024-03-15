@@ -28,8 +28,8 @@ public class Shooter extends SubsystemBase {
 
   public void prime() {
     timer.start();
-    leftShooterMotor.set(-0.55);
-    rightShooterMotor.set(0.55);
+    leftShooterMotor.set(-0.65);
+    rightShooterMotor.set(0.65);
     // leftShooterMotor.getPIDController().setReference(3.0, ControlType.kVoltage);
     // rightShooterMotor.getPIDController().setReference(3.0, ControlType.kVoltage);
   }
@@ -42,6 +42,6 @@ public class Shooter extends SubsystemBase {
   }
 
   public boolean isPrimed() {
-    return timer.hasElapsed(0.2);
+    return timer.hasElapsed(0.3);
   }
 }
