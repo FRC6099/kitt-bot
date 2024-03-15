@@ -9,6 +9,7 @@ import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import frc.robot.commands.EjectNote;
 import frc.robot.commands.ExtendIntakeArm;
 import frc.robot.commands.InjectNote;
+import frc.robot.commands.RetractIntakeArm;
 import frc.robot.subsystems.DriveTrain;
 import frc.robot.subsystems.Intake;
 import frc.robot.subsystems.Shooter;
@@ -27,6 +28,7 @@ public class EjectTwoNoteSequence extends SequentialCommandGroup {
       new ParallelCommandGroup(
         new InjectNote(intake), 
         new DriveForward(driveTrain, 1.0)),
+      new RetractIntakeArm(intake),
       new DriveBackward(driveTrain, 1.0),
       new EjectNote(intake, shooter)
     );
