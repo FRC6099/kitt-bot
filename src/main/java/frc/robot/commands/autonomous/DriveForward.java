@@ -33,8 +33,8 @@ public class DriveForward extends Command {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    driveTrain.moveLeftMotors(0.25);
-    driveTrain.moveRightMotors(0.26);
+    driveTrain.moveLeftMotors(0.4);
+    driveTrain.moveRightMotors(0.4);
     timer.reset();
     timer.start();
     System.out.println("** Moving Forward");
