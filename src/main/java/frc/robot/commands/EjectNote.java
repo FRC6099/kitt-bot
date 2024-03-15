@@ -58,7 +58,7 @@ public class EjectNote extends Command {
   }
 
   private boolean getWasNotePresent() {
-    if (wasNotePresent && isTimerStarted && timer.hasElapsed(5.0)) {
+    if (wasNotePresent && isTimerStarted && timer.hasElapsed(2.0)) {
       wasNotePresent = false;
       isTimerStarted = false;
       timer.stop();

@@ -12,6 +12,8 @@ import frc.robot.commands.OperateClimber;
 import frc.robot.commands.RetractIntakeArm;
 import frc.robot.commands.TankDrive;
 import frc.robot.commands.autonomous.DriveBackward;
+import frc.robot.commands.autonomous.DriveForward;
+import frc.robot.commands.autonomous.EjectNoteAndMove;
 import frc.robot.commands.autonomous.EjectTwoNoteSequence;
 import frc.robot.controllers.ClimberController;
 import frc.robot.controllers.TankDriveController;
@@ -76,6 +78,8 @@ public class RobotContainer {
   private void configureAutonomousModes() {
     this.autonomousChooser.setDefaultOption("Do nothing", new WaitCommand(10.0));
     this.autonomousChooser.addOption("Drive Backwards", new DriveBackward(driveTrain));
+    this.autonomousChooser.addOption("Drive Forward", new DriveForward(driveTrain));
+    this.autonomousChooser.addOption("Score A Note", new EjectNoteAndMove(intake, shooter, driveTrain));
     this.autonomousChooser.addOption("Score two notes", new EjectTwoNoteSequence(intake, shooter, driveTrain));
     SmartDashboard.putData("Autonomous Options", this.autonomousChooser);
     // SmartDashboard.putNumber("Autonomous Number", 0);
