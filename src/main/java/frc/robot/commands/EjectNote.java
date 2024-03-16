@@ -25,7 +25,7 @@ public class EjectNote extends Command {
     this.intake = intake;
     this.shooter = shooter;
     this.driveTrain = driveTrain;
-    addRequirements(intake, shooter);
+    addRequirements(intake, shooter, driveTrain);
   }
 
   // Called when the command is initially scheduled.
