@@ -19,7 +19,7 @@ public class EjectNoteAndMove extends SequentialCommandGroup {
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
     addCommands(
-      new EjectNote(intake, shooter),
+      new EjectNote(intake, shooter, driveTrain),
       new DriveForward(driveTrain, 2.0)
     );
   }

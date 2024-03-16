@@ -53,7 +53,7 @@ public class RobotContainer {
   private final ExtendIntakeArm extendIntakeArm = new ExtendIntakeArm(intake);
   private final RetractIntakeArm retractIntakeArm = new RetractIntakeArm(intake);
   private final InjectNote injectNote = new InjectNote(intake);
-  private final EjectNote ejectNote = new EjectNote(intake, shooter);
+  private final EjectNote ejectNote = new EjectNote(intake, shooter, driveTrain);
   private final OperateClimber operateClimber = new OperateClimber(new ClimberController(xboxController), climber);
   private final DetectArmPosition detectArmPosition = new DetectArmPosition(intake);
 
@@ -76,10 +76,10 @@ public class RobotContainer {
   }
 
   private void configureAutonomousModes() {
-    this.autonomousChooser.setDefaultOption("Do nothing", new WaitCommand(10.0));
+    this.autonomousChooser.addOption("Do nothing", new WaitCommand(10.0));
     this.autonomousChooser.addOption("Drive Backwards", new DriveBackward(driveTrain, 3.0));
     this.autonomousChooser.addOption("Drive Forward", new DriveForward(driveTrain, 3.0));
-    this.autonomousChooser.addOption("Score A Note", new EjectNoteAndMove(intake, shooter, driveTrain));
+    this.autonomousChooser.setDefaultOption("Score A Note", new EjectNoteAndMove(intake, shooter, driveTrain));
     // this.autonomousChooser.addOption("Score two notes", new EjectTwoNoteSequence(intake, shooter, driveTrain));
     SmartDashboard.putData("Autonomous Options", this.autonomousChooser);
     // SmartDashboard.putNumber("Autonomous Number", 0);

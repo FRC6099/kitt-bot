@@ -9,7 +9,6 @@ import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.RelativeEncoder;
 import com.revrobotics.SparkPIDController;
-import com.revrobotics.CANSparkBase.ControlType;
 import com.revrobotics.CANSparkLowLevel.MotorType;
 import com.revrobotics.SparkRelativeEncoder.Type;
 
@@ -20,8 +19,6 @@ import frc.robot.Constants;
 import frc.robot.enums.ArmPosition;
 
 public class Intake extends SubsystemBase {
-
-  private static final double ARM_VELOCITY = 1.0;
 
   private final CANSparkMax armMotor = new CANSparkMax(Constants.INTAKE_ARM_MOTOR_CAN_ID, MotorType.kBrushed);
   private final SparkPIDController armPID = armMotor.getPIDController();
