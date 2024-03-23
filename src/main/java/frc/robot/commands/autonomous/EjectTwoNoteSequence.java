@@ -22,14 +22,17 @@ public class EjectTwoNoteSequence extends SequentialCommandGroup {
   public EjectTwoNoteSequence(Intake intake, Shooter shooter, DriveTrain driveTrain) {
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
+    InjectNote injectNote = new InjectNote(intake);
+    DriveForward driveForward = new DriveForward(driveTrain, 2.0);
     addCommands(
       new EjectNote(intake, shooter, driveTrain),
-      new ExtendIntakeArm(intake),
+      new ExtendIntakeArm(intake, 1.0),
       new ParallelCommandGroup(
-        new InjectNote(intake), 
-        new DriveForward(driveTrain, 1.0)),
-      new RetractIntakeArm(intake),
-      new DriveBackward(driveTrain, 1.0),
+        injectNote, 
+        driveForward,
+        new CancelCommandsWhenAnyFinish(injectNote, driveForward)),
+      new RetractIntakeArm(intake, 1.0),
+      new DriveBackward(driveTrain, 2.0),
       new EjectNote(intake, shooter, driveTrain)
     );
   }
