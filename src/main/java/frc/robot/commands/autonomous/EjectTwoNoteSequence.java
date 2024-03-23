@@ -26,13 +26,16 @@ public class EjectTwoNoteSequence extends SequentialCommandGroup {
     DriveForward driveForward = new DriveForward(driveTrain, 2.0);
     addCommands(
       new EjectNote(intake, shooter, driveTrain),
-      new ExtendIntakeArm(intake, 1.0),
+      new ExtendIntakeArm(intake, 2.0),
       new ParallelCommandGroup(
         injectNote, 
         driveForward,
         new CancelCommandsWhenAnyFinish(injectNote, driveForward)),
-      new RetractIntakeArm(intake, 1.0),
-      new DriveBackward(driveTrain, 2.0),
+          new DriveBackward(driveTrain, 0.05),
+        // new ParallelCommandGroup(
+          new RetractIntakeArm(intake, 2.0),
+          new DriveBackward(driveTrain, 1.75),     
+          //),
       new EjectNote(intake, shooter, driveTrain)
     );
   }
