@@ -4,6 +4,19 @@ This is team 6099 Knight Riders robot. This will be updated each year.
 ## Tagging
 We'll follow the following pattern for tagging: `yyyy.minor.patch`
 
+For updates, please tag with command similar to:
+
+```bash
+git tag vYYYY.0.0 -a -m "YYYY changes"
+git push --tags
+```
+
+Replace `YYYY` with the current year. Maintain the `YYYY` throughout the whole season.
+When pushing changes to the **main** branch, please create a new tag with either the `patch`
+or `minor` version number incremented. Increment the `minor` version when there are drastic
+changes present and reset `patch` version number back to zero (0).
+
+
 ## Upgrades
 For the new year, to upgrade, please follow the prompts in the WPI Lib Project Importer tool.
 Note that the tool will make a new directory in the parent folder. Set the project name to 
