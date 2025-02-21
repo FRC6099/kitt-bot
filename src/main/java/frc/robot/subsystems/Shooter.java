@@ -4,8 +4,8 @@
 
 package frc.robot.subsystems;
 
-import com.revrobotics.CANSparkFlex;
-import com.revrobotics.CANSparkLowLevel.MotorType;
+import com.revrobotics.spark.SparkFlex;
+import com.revrobotics.spark.SparkLowLevel.MotorType;
 
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
@@ -13,8 +13,8 @@ import frc.robot.Constants;
 
 public class Shooter extends SubsystemBase {
 
-  private final CANSparkFlex leftShooterMotor = new CANSparkFlex(Constants.LEFT_SHOOTER_ARM_MOTOR_CAN_ID, MotorType.kBrushless);
-  private final CANSparkFlex rightShooterMotor = new CANSparkFlex(Constants.RIGHT_SHOOTER_ARM_MOTOR_CAN_ID, MotorType.kBrushless);
+  private final SparkFlex leftShooterMotor = new SparkFlex(Constants.LEFT_SHOOTER_ARM_MOTOR_CAN_ID, MotorType.kBrushless);
+  private final SparkFlex rightShooterMotor = new SparkFlex(Constants.RIGHT_SHOOTER_ARM_MOTOR_CAN_ID, MotorType.kBrushless);
   private final Timer timer = new Timer();
 
   /** Creates a new Shooter. */

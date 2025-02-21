@@ -6,11 +6,10 @@ package frc.robot.subsystems;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
-import com.revrobotics.CANSparkMax;
+import com.revrobotics.spark.SparkClosedLoopController;
+import com.revrobotics.spark.SparkMax;
 import com.revrobotics.RelativeEncoder;
-import com.revrobotics.SparkPIDController;
-import com.revrobotics.CANSparkLowLevel.MotorType;
-import com.revrobotics.SparkRelativeEncoder.Type;
+import com.revrobotics.spark.SparkLowLevel.MotorType;
 
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -20,9 +19,8 @@ import frc.robot.enums.ArmPosition;
 
 public class Intake extends SubsystemBase {
 
-  private final CANSparkMax armMotor = new CANSparkMax(Constants.INTAKE_ARM_MOTOR_CAN_ID, MotorType.kBrushed);
-  private final SparkPIDController armPID = armMotor.getPIDController();
-  private final RelativeEncoder armEncoder = armMotor.getEncoder(Type.kQuadrature, 2048);
+  private final SparkMax armMotor = new SparkMax(Constants.INTAKE_ARM_MOTOR_CAN_ID, MotorType.kBrushed);
+  private final RelativeEncoder armEncoder = armMotor.getEncoder();
   private final WPI_TalonSRX grabberMotor = new WPI_TalonSRX(Constants.INTAKE_GRABBER_MOTOR_CAN_ID);
   private final DigitalInput noteLimitSwitch = new DigitalInput(Constants.NOTE_LIMIT_SWITCH);
 
@@ -30,7 +28,7 @@ public class Intake extends SubsystemBase {
   public Intake() {
 
     // Clear out any motor specific settings when controller was first configured
-    armMotor.restoreFactoryDefaults();
+    // armMotor.restoreFactoryDefaults();
     
     // armPID.setFeedbackDevice(armEncoder);
 
