@@ -2,7 +2,7 @@
 This is team 6099 Knight Riders robot. This will be updated each year.
 
 ## Tagging
-We'll follow the following pattern for tagging: `yyyy.minor.path`
+We'll follow the following pattern for tagging: `yyyy.minor.patch`
 
 ## Upgrades
 For the new year, to upgrade, please follow the prompts in the WPI Lib Project Importer tool.
@@ -15,7 +15,7 @@ After that, please run the bash command below in the *kitt-bot-tmp* folder.
 cp -r . ../kitt-bot
 ```
 
-This will copy the changed 2025 files back into the original project. Feel free to compare the 
+This will copy the new year's files back into the original project. Feel free to compare the 
 differences using below command in the *kitt-bot* folder.
 
 ```bash
