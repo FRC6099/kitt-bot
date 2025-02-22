@@ -39,6 +39,8 @@ public final class Constants {
     public static final int CLIMBER_MOTOR_CAN_ID = 6;
 
 
+    // TODO: CLEANUP BELOW CONSTANTS AFTER SUBSYSTEMS ARE UPDATED
+
     // Intake Arm
     public static final int INTAKE_ARM_MOTOR_CAN_ID = 5;
     public static final int INTAKE_GRABBER_MOTOR_CAN_ID = 6;
