@@ -6,15 +6,17 @@ package frc.robot.subsystems;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
+import com.revrobotics.spark.SparkMax;
+import com.revrobotics.spark.SparkLowLevel.MotorType;
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 
 public class DriveTrain extends SubsystemBase {
-  private final WPI_TalonSRX leftFrontMotor = new WPI_TalonSRX(Constants.LEFT_FRONT_DRIVE_MOTOR_CAN_ID);
-  private final WPI_TalonSRX rightFrontMotor = new WPI_TalonSRX(Constants.RIGHT_FRONT_DRIVE_MOTOR_CAN_ID);
-  private final WPI_TalonSRX leftRearMotor = new WPI_TalonSRX(Constants.LEFT_REAR_DRIVE_MOTOR_CAN_ID);
-  private final WPI_TalonSRX rightRearMotor = new WPI_TalonSRX(Constants.RIGHT_REAR_DRIVE_MOTOR_CAN_ID);
+  private final SparkMax leftFrontMotor = new SparkMax(Constants.LEFT_FRONT_DRIVE_MOTOR_CAN_ID, MotorType .kBrushless);
+  private final SparkMax rightFrontMotor = new SparkMax(Constants.RIGHT_FRONT_DRIVE_MOTOR_CAN_ID, MotorType .kBrushless);
+  private final SparkMax leftRearMotor = new SparkMax(Constants.LEFT_REAR_DRIVE_MOTOR_CAN_ID, MotorType.kBrushless);
+  private final SparkMax rightRearMotor = new SparkMax(Constants.RIGHT_REAR_DRIVE_MOTOR_CAN_ID, MotorType .kBrushless);
 
 
   /** Creates a new DriveTrain. */
@@ -26,13 +28,13 @@ public class DriveTrain extends SubsystemBase {
   }
 
   public void moveLeftMotors(double speed) {
-    leftFrontMotor.set(ControlMode.PercentOutput, speed);
-    leftRearMotor.set(ControlMode.PercentOutput, speed);
+    leftFrontMotor.set( speed);
+    leftRearMotor.set(speed);
   }
   
   public void moveRightMotors(double speed) {
-    rightFrontMotor.set(ControlMode.PercentOutput, -speed);
-    rightRearMotor.set(ControlMode.PercentOutput, -speed);
+    rightFrontMotor.set( -speed);
+    rightRearMotor.set( -speed);
   }
 
   public void stop() {
