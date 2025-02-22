@@ -20,10 +20,24 @@ public final class Constants {
 
     /*** CAN IDs  ***/
     // Drive Train
-    public static final int RIGHT_FRONT_DRIVE_MOTOR_CAN_ID = 1;
-    public static final int RIGHT_REAR_DRIVE_MOTOR_CAN_ID = 2;
-    public static final int LEFT_FRONT_DRIVE_MOTOR_CAN_ID = 3;
-    public static final int LEFT_REAR_DRIVE_MOTOR_CAN_ID = 4;
+    public static final int RIGHT_FRONT_DRIVE_MOTOR_CAN_ID = 2;
+    public static final int RIGHT_REAR_DRIVE_MOTOR_CAN_ID = 3;
+    public static final int LEFT_FRONT_DRIVE_MOTOR_CAN_ID = 1;
+    public static final int LEFT_REAR_DRIVE_MOTOR_CAN_ID = 9;
+
+    // Arm Motors
+
+    public static final int RIGHT_ARM_MOTOR_CAN_ID = 4;
+    public static final int LEFT_ARM_MOTOR_CAN_ID = 8;
+
+
+    // iNTAKE MOTORS 
+    public static final int RIGHT_INTAKE_MOTOR_CAN_ID = 5;
+    public static final int LEFT_INTAKE_MOTOR_CAN_ID = 7;
+    
+    // CLIMB MOTORS 
+    public static final int CLIMBER_MOTOR_CAN_ID = 6;
+
 
     // Intake Arm
     public static final int INTAKE_ARM_MOTOR_CAN_ID = 5;
