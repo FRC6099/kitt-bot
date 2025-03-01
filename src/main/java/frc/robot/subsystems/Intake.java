@@ -19,10 +19,12 @@ import frc.robot.enums.ArmPosition;
 
 public class Intake extends SubsystemBase {
 
-  private final SparkMax armMotor = new SparkMax(Constants.INTAKE_ARM_MOTOR_CAN_ID, MotorType.kBrushed);
-  private final RelativeEncoder armEncoder = armMotor.getEncoder();
-  private final WPI_TalonSRX grabberMotor = new WPI_TalonSRX(Constants.INTAKE_GRABBER_MOTOR_CAN_ID);
-  private final DigitalInput noteLimitSwitch = new DigitalInput(Constants.NOTE_LIMIT_SWITCH);
+  private final SparkMax armleftMotor = new SparkMax(Constants.LEFT_INTAKE_MOTOR_CAN_ID , MotorType.kBrushless);
+  private final SparkMax armrightMotor = new SparkMax(Constants.RIGHT_ARM_MOTOR_CAN_ID, MotorType.kBrushless);
+
+  private final RelativeEncoder armEncoder = armleftMotor.getEncoder();
+  private final SparkMax intakeMotor = new SparkMax(Constants.INTAKE_GRABBER_MOTOR_CAN_ID, MotorType.kBrushless);
+  
 
   /** Creates a new Intake. */
   public Intake() {
@@ -81,34 +83,40 @@ public class Intake extends SubsystemBase {
 
   public void moveArm(ArmPosition position) {
     if (ArmPosition.HOME == position) {
-      armMotor.set(0.2);
+      armleftMotor.set(0.2);
+      armrightMotor.set(0.2);
+
       // armPID.setReference(0, ControlType.kPosition);
     } else if (ArmPosition.EXTENDED == position) {
-      armMotor.set(-0.2);
+      armleftMotor.set(-0.2);
+      armrightMotor.set(-0.2);
       // TODO: Get Actual Position for EXTENDED
       // armPID.setReference(90, ControlType.kPosition);
     }
   }
 
   public void moveArm(double speed) {
-    armMotor.set(speed);
+    armleftMotor.set(speed);
+    armrightMotor.set(speed);
+  
   }
 
   public void stopArm() {
-    armMotor.set(0.0);
+    armleftMotor.set(0.0);
+    armrightMotor.set(0.0);
     // armPID.setReference(0.0, ControlType.kVoltage);
   }
 
   public void inject() {
-    grabberMotor.set(ControlMode.PercentOutput, 0.75);
+    intakeMotor.set( 0.75);
   }
 
   public void eject() {
-    grabberMotor.set(ControlMode.PercentOutput, -0.75);
+    intakeMotor.set( -0.75);
   }
 
   public void stopIntake() {
-    grabberMotor.set(ControlMode.PercentOutput, 0.0);
+    intakeMotor.set( 0.0);
   }
 
   public ArmPosition getArmPosition() {
@@ -123,6 +131,7 @@ public class Intake extends SubsystemBase {
   }
 
   public boolean isNotePresent() {
-    return !noteLimitSwitch.get();
+    return false;
   }
+
 }
