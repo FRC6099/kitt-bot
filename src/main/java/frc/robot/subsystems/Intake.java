@@ -19,12 +19,13 @@ import frc.robot.enums.ArmPosition;
 
 public class Intake extends SubsystemBase {
 
-  private final SparkMax armleftMotor = new SparkMax(Constants.LEFT_INTAKE_MOTOR_CAN_ID , MotorType.kBrushless);
+  private final SparkMax armleftMotor = new SparkMax(Constants.LEFT_ARM_MOTOR_CAN_ID , MotorType.kBrushless);
   private final SparkMax armrightMotor = new SparkMax(Constants.RIGHT_ARM_MOTOR_CAN_ID, MotorType.kBrushless);
 
   private final RelativeEncoder armEncoder = armleftMotor.getEncoder();
-  private final SparkMax intakeMotor = new SparkMax(Constants.INTAKE_GRABBER_MOTOR_CAN_ID, MotorType.kBrushless);
-  
+  private final SparkMax leftIntakeMotor = new SparkMax(Constants.LEFT_INTAKE_MOTOR_CAN_ID, MotorType.kBrushless);
+  private final SparkMax rightIntakeMotor = new SparkMax(Constants.RIGHT_INTAKE_MOTOR_CAN_ID, MotorType.kBrushless);
+
 
   /** Creates a new Intake. */
   public Intake() {
@@ -108,15 +109,21 @@ public class Intake extends SubsystemBase {
   }
 
   public void inject() {
-    intakeMotor.set( 0.75);
+    leftIntakeMotor.set( 0.75);
+    rightIntakeMotor.set( 0.75);
+
   }
 
   public void eject() {
-    intakeMotor.set( -0.75);
+    leftIntakeMotor.set( -0.75);
+    rightIntakeMotor.set( -0.75);
+
   }
 
   public void stopIntake() {
-    intakeMotor.set( 0.0);
+    leftIntakeMotor.set( 0.0);
+    rightIntakeMotor.set( 0.0);
+
   }
 
   public ArmPosition getArmPosition() {
@@ -131,7 +138,7 @@ public class Intake extends SubsystemBase {
   }
 
   public boolean isNotePresent() {
-    return false;
+    return true;
   }
 
 }
