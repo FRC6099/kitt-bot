@@ -20,22 +20,38 @@ public final class Constants {
 
     /*** CAN IDs  ***/
     // Drive Train
-    public static final int RIGHT_FRONT_DRIVE_MOTOR_CAN_ID = 1;
-    public static final int RIGHT_REAR_DRIVE_MOTOR_CAN_ID = 2;
-    public static final int LEFT_FRONT_DRIVE_MOTOR_CAN_ID = 3;
-    public static final int LEFT_REAR_DRIVE_MOTOR_CAN_ID = 4;
+    public static final int RIGHT_FRONT_DRIVE_MOTOR_CAN_ID = 2;
+    public static final int RIGHT_REAR_DRIVE_MOTOR_CAN_ID = 3;
+    public static final int LEFT_FRONT_DRIVE_MOTOR_CAN_ID = 1;
+    public static final int LEFT_REAR_DRIVE_MOTOR_CAN_ID = 9;
+
+    // Arm Motors
+
+    public static final int RIGHT_ARM_MOTOR_CAN_ID = 4;
+    public static final int LEFT_ARM_MOTOR_CAN_ID = 8;
+
+
+    // iNTAKE MOTORS 
+    public static final int RIGHT_INTAKE_MOTOR_CAN_ID = 5;
+    public static final int LEFT_INTAKE_MOTOR_CAN_ID = 7;
+    
+    // CLIMB MOTORS 
+    public static final int CLIMBER_MOTOR_CAN_ID = 6;
+
+
+    // TODO: CLEANUP BELOW CONSTANTS AFTER SUBSYSTEMS ARE UPDATED
 
     // Intake Arm
-    public static final int INTAKE_ARM_MOTOR_CAN_ID = 5;
-    public static final int INTAKE_GRABBER_MOTOR_CAN_ID = 6;
+    public static final int INTAKE_ARM_MOTOR_CAN_ID = 105;
+    public static final int INTAKE_GRABBER_MOTOR_CAN_ID = 106;
 
     // Shooter
-    public static final int LEFT_SHOOTER_ARM_MOTOR_CAN_ID = 7;
-    public static final int RIGHT_SHOOTER_ARM_MOTOR_CAN_ID = 8;
+    public static final int LEFT_SHOOTER_ARM_MOTOR_CAN_ID = 107;
+    public static final int RIGHT_SHOOTER_ARM_MOTOR_CAN_ID = 108;
 
     // Climber
-    public static final int LEFT_CLIMBER_MOTOR_CAN_ID = 9;
-    public static final int RIGHT_CLIMBER_MOTOR_CAN_ID = 10;
+    public static final int LEFT_CLIMBER_MOTOR_CAN_ID = 109;
+    public static final int RIGHT_CLIMBER_MOTOR_CAN_ID = 1010;
 
     /*** Relays ***/
     // Climber
