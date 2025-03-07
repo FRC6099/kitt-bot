@@ -16,9 +16,9 @@ import frc.robot.subsystems.Intake;
 // NOTE:  Consider using this command inline, rather than writing a subclass.  For more
 // information, see:
 // https://docs.wpilib.org/en/stable/docs/software/commandbased/convenience-features.html
-public class EjectTwoNoteSequence extends SequentialCommandGroup {
+public class EjectTwoFieldElementsSequence extends SequentialCommandGroup {
   /** Creates a new EjectTwoNoteSequence. */
-  public EjectTwoNoteSequence(Intake intake, DriveTrain driveTrain) {
+  public EjectTwoFieldElementsSequence(Intake intake, DriveTrain driveTrain) {
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
     InjectFieldElement injectNote = new InjectFieldElement(intake);
