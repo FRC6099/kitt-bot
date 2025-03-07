@@ -21,6 +21,7 @@ public class Climber extends SubsystemBase {
   }
 
   public void operateClaw(double speed) {
+    // TODO: Add encoder to limit open and close max positions (perhaps it can also be limited by motor current draw?)
     clawMotor.set(speed);
   }
 

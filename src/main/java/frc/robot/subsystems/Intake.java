@@ -132,7 +132,7 @@ public class Intake extends SubsystemBase {
     return ArmPosition.OUT_OF_POSITION;
   }
 
-  public boolean isNotePresent() {
+  public boolean isElementPresent() {
     return true;
   }
 

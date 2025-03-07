@@ -51,7 +51,7 @@ public class EjectFieldElement extends Command {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    //return !this.getWasNotePresent(); // || ArmPosition.HOME != this.intake.getArmPosition();
+    //return !this.getWasElementPresent(); // || ArmPosition.HOME != this.intake.getArmPosition();
     return false;
   }
 
@@ -62,7 +62,7 @@ public class EjectFieldElement extends Command {
       timer.stop();
     }
 
-    if (this.intake.isNotePresent()) {
+    if (this.intake.isElementPresent()) {
       wasElementPresent = true;
     } else if (wasElementPresent && !isTimerStarted) {
       isTimerStarted = true;
