@@ -18,8 +18,4 @@ public class ClimberController {
     public double getLeftPosition() {
         return controller.getRawAxis(Axis.kLeftY.value);
     }
-
-    public double getRightPosition() {
-        return controller.getRawAxis(Axis.kRightY.value);
-    }
 }
