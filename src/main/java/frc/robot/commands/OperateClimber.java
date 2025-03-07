@@ -28,25 +28,18 @@ public class OperateClimber extends Command {
   @Override
   public void execute() {
     double left = controller.getLeftPosition();
-    double right = controller.getRightPosition();
 
     if (Math.abs(left) > 0.1) {
-      climber.moveLeft(left);
+      climber.operateClaw(left); // TODO: We may need to limit open/close speed
     } else {
-      climber.stopLeft();
-    }
-    if (Math.abs(right) > 0.1) {
-      climber.moveRight(right);
-    } else {
-      climber.stopRight();
+      climber.stopClaw();
     }
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    climber.stopLeft();
-    climber.stopRight();
+    climber.stopClaw();
   }
 
   // Returns true when the command should end.

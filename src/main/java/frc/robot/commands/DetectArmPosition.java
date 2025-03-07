@@ -27,7 +27,7 @@ public class DetectArmPosition extends Command {
   public void execute() {
     ArmPosition armPosition = intake.getArmPosition();
     SmartDashboard.putString("Arm Position", armPosition.name());
-    SmartDashboard.putBoolean("Shooter Ready", ArmPosition.HOME == armPosition && intake.isNotePresent());
+    SmartDashboard.putBoolean("Shooter Ready", ArmPosition.HOME == armPosition && intake.isElementPresent());
     
   }
 

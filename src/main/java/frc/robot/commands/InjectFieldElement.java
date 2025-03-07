@@ -7,11 +7,11 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.subsystems.Intake;
 
-public class InjectNote extends Command {
+public class InjectFieldElement extends Command {
   private final Intake intake;
 
   /** Creates a new InjectNote. */
-  public InjectNote(Intake intake) {
+  public InjectFieldElement(Intake intake) {
     this.intake = intake;
     addRequirements(intake);
   }
@@ -37,6 +37,7 @@ public class InjectNote extends Command {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return this.intake.isNotePresent();
+    //return this.intake.isNotePresent();
+    return false;
   }
 }
