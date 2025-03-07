@@ -19,7 +19,7 @@ public class DriveTrain extends SubsystemBase {
 
   /** Creates a new DriveTrain. */
   public DriveTrain() {
-    // TODO: Configure motors to use encoders instead
+    // TODO: Configure motors to use encoders instead (see update-drivetrain-sample branch)
   }
 
   @Override
