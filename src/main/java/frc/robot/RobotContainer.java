@@ -23,7 +23,6 @@ import frc.robot.subsystems.Intake;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
-import edu.wpi.first.wpilibj2.command.RunCommand;
 import edu.wpi.first.wpilibj2.command.WaitCommand;
 import edu.wpi.first.wpilibj2.command.button.CommandJoystick;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
@@ -50,8 +49,8 @@ public class RobotContainer {
   private final TankDrive tankDrive = new TankDrive(driveTrain, new TankDriveController(leftJoystick, rightJoystick));
   private final ExtendIntakeArm extendIntakeArm = new ExtendIntakeArm(intake);
   private final RetractIntakeArm retractIntakeArm = new RetractIntakeArm(intake);
-  private final InjectFieldElement injectNote = new InjectFieldElement(intake);
-  private final EjectFieldElement ejectNote = new EjectFieldElement(intake, driveTrain);
+  private final InjectFieldElement injectFieldElement = new InjectFieldElement(intake);
+  private final EjectFieldElement ejectFieldElement = new EjectFieldElement(intake, driveTrain);
   private final OperateClimber operateClimber = new OperateClimber(new ClimberController(xboxController), climber);
   private final DetectArmPosition detectArmPosition = new DetectArmPosition(intake);
 
@@ -102,8 +101,8 @@ public class RobotContainer {
     // m_driverController.b().whileTrue(m_exampleSubsystem.exampleMethodCommand());
     xboxController.leftBumper().whileTrue(extendIntakeArm);
     xboxController.rightBumper().whileTrue(retractIntakeArm);
-    xboxController.leftTrigger().whileTrue(injectNote);
-    xboxController.rightTrigger().whileTrue(ejectNote);
+    xboxController.leftTrigger().whileTrue(injectFieldElement);
+    xboxController.rightTrigger().whileTrue(ejectFieldElement);
     // xboxController.a()
     // .whileTrue(new RunCommand(() -> shooter.prime(), shooter))
     // .whileFalse(new RunCommand(() -> shooter.stop(), shooter));
