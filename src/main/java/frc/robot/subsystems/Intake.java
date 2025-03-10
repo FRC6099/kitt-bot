@@ -5,6 +5,7 @@
 package frc.robot.subsystems;
 
 import com.revrobotics.spark.SparkMax;
+
 import com.revrobotics.RelativeEncoder;
 import com.revrobotics.spark.SparkLowLevel.MotorType;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -79,12 +80,12 @@ public class Intake extends SubsystemBase {
 
   public void moveArm(ArmPosition position) {
     if (ArmPosition.HOME == position) {
-      armLeftMotor.set(0.2);
+      armLeftMotor.set(-0.2);
       armRightMotor.set(0.2);
 
       // armPID.setReference(0, ControlType.kPosition);
     } else if (ArmPosition.EXTENDED == position) {
-      armLeftMotor.set(-0.2);
+      armLeftMotor.set(0.2);
       armRightMotor.set(-0.2);
       // TODO: Get Actual Position for EXTENDED
       // armPID.setReference(90, ControlType.kPosition);
@@ -92,8 +93,8 @@ public class Intake extends SubsystemBase {
   }
 
   public void moveArm(double speed) {
-    armLeftMotor.set(speed);
-    armRightMotor.set(speed);
+    armLeftMotor.set(-speed*0.3);
+    armRightMotor.set(speed*0.3);
   
   }
 
@@ -104,15 +105,13 @@ public class Intake extends SubsystemBase {
   }
 
   public void inject() {
-    leftIntakeMotor.set( 0.75);
-    rightIntakeMotor.set( 0.75);
-
+    leftIntakeMotor.set(0.5);
+    rightIntakeMotor.set( -0.5);
   }
 
   public void eject() {
-    leftIntakeMotor.set( -0.75);
-    rightIntakeMotor.set( -0.75);
-
+    leftIntakeMotor.set( -0.5);
+    rightIntakeMotor.set(0.5);
   }
 
   public void stopIntake() {
