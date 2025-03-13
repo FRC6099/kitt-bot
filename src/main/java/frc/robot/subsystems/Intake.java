@@ -93,6 +93,8 @@ public class Intake extends SubsystemBase {
   }
 
   public void moveArm(double speed) {
+    System.out.println("This works right???");
+    System.out.print(armEncoder.getPosition());
     armLeftMotor.set(-speed*0.3);
     armRightMotor.set(speed*0.3);
   
@@ -105,13 +107,13 @@ public class Intake extends SubsystemBase {
   }
 
   public void inject() {
-    leftIntakeMotor.set(-0.25);
-    rightIntakeMotor.set( -0.25);
+    leftIntakeMotor.set(-0.3);
+    rightIntakeMotor.set( -0.3);
   }
 
   public void eject() {
-    leftIntakeMotor.set( 0.25);
-    rightIntakeMotor.set(0.25);
+    leftIntakeMotor.set( 0.3);
+    rightIntakeMotor.set(0.3);
   }
 
   public void stopIntake() {
