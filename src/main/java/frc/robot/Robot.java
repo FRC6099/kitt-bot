@@ -22,6 +22,8 @@ public class Robot extends TimedRobot {
   private Command m_autonomousCommand;
 
   private RobotContainer m_robotContainer;
+  private UsbCamera camera1;
+  private UsbCamera camera2;
 
   /**
    * This function is run when the robot is first started up and should be used for any
@@ -32,11 +34,17 @@ public class Robot extends TimedRobot {
     // Instantiate our RobotContainer.  This will perform all our button bindings, and put our
     // autonomous chooser on the dashboard.
     m_robotContainer = new RobotContainer();
+    camera1 = startCamera();
+    camera2 = startCamera();
+  }
+
+  private UsbCamera startCamera() {
     UsbCamera camera1 = CameraServer.startAutomaticCapture();
     camera1.setConnectionStrategy(ConnectionStrategy.kKeepOpen);
     camera1.setVideoMode(PixelFormat.kMJPEG, 120, 90, 15);
     camera1.setExposureManual(40);
     camera1.setWhiteBalanceHoldCurrent();
+    return camera1;
   }
 
   /**
