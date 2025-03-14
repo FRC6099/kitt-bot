@@ -5,6 +5,7 @@
 package frc.robot.subsystems;
 
 import com.revrobotics.spark.SparkMax;
+import com.revrobotics.spark.SparkBase.ControlType;
 import com.revrobotics.spark.SparkBase.PersistMode;
 import com.revrobotics.spark.SparkBase.ResetMode;
 import com.revrobotics.spark.SparkLowLevel.MotorType;
@@ -89,11 +90,13 @@ public class DriveTrain extends SubsystemBase {
   }
 
   public void moveLeftMotors(double speed) {
-    leftFrontMotor.set(speed);
+    // leftFrontMotor.set(speed);
+     leftFrontMotor.getClosedLoopController().setReference(speed, ControlType.kMAXMotionVelocityControl);
   }
   
   public void moveRightMotors(double speed) {
-    rightFrontMotor.set(speed);
+    // rightFrontMotor.set(speed);
+    rightFrontMotor.getClosedLoopController().setReference(speed, ControlType.kMAXMotionVelocityControl);
   }
 
   public void stop() {
