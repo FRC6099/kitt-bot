@@ -14,7 +14,7 @@ public class DriveBackward extends Command {
   private final Timer timer;
 
   public DriveBackward(DriveTrain driveTrain) {
-    this(driveTrain, 4.0);
+    this(driveTrain, 2.0);
   }
 
   public DriveBackward(DriveTrain driveTrain, double duration) {

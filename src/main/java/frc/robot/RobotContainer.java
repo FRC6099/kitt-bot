@@ -74,8 +74,8 @@ public class RobotContainer {
 
   private void configureAutonomousModes() {
     this.autonomousChooser.addOption("Do nothing", new WaitCommand(10.0));
-    this.autonomousChooser.addOption("Drive Backwards", new DriveBackward(driveTrain, 3.0));
-    this.autonomousChooser.addOption("Drive Forward", new DriveForward(driveTrain, 3.0));
+    this.autonomousChooser.addOption("Drive Backwards", new DriveBackward(driveTrain, 2.0));
+    this.autonomousChooser.addOption("Drive Forward", new DriveForward(driveTrain, 2.0));
     this.autonomousChooser.setDefaultOption("Score A Note", new EjectFieldElementAndMove(intake, driveTrain));
     // this.autonomousChooser.addOption("Score two notes", new EjectTwoFieldElementsSequence(intake, driveTrain));
     SmartDashboard.putData("Autonomous Options", this.autonomousChooser);
