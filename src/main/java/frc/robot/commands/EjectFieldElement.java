@@ -17,11 +17,18 @@ public class EjectFieldElement extends Command {
 
   private boolean wasElementPresent = false;
   private boolean isTimerStarted = false;
+  private final double duration;
+
 
   /** Creates a new InjectNote. */
   public EjectFieldElement(Intake intake, DriveTrain driveTrain) {
+    this(intake, driveTrain, 0.5);
+  }
+
+  public EjectFieldElement(Intake intake, DriveTrain driveTrain, double duration) {
     this.intake = intake;
     this.driveTrain = driveTrain;
+    this.duration=duration;
     addRequirements(intake, driveTrain);
   }
 
@@ -29,6 +36,8 @@ public class EjectFieldElement extends Command {
   @Override
   public void initialize() {
     this.driveTrain.stop();
+    timer.reset();
+    timer.start();
   }
 
   // Called every time the scheduler runs while the command is scheduled.
@@ -52,7 +61,7 @@ public class EjectFieldElement extends Command {
   @Override
   public boolean isFinished() {
     //return !this.getWasElementPresent(); // || ArmPosition.HOME != this.intake.getArmPosition();
-    return false;
+    return timer.hasElapsed(duration);
   }
 
   private boolean getWasElementPresent() {
