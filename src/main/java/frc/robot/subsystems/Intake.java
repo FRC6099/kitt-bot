@@ -107,13 +107,13 @@ public class Intake extends SubsystemBase {
   }
 
   public void inject() {
-    leftIntakeMotor.set(-0.3);
-    rightIntakeMotor.set( -0.3);
+    leftIntakeMotor.set(-0.45);
+    rightIntakeMotor.set( -0.45);
   }
 
   public void eject() {
-    leftIntakeMotor.set( 0.3);
-    rightIntakeMotor.set(0.3);
+    leftIntakeMotor.set( 0.45);
+    rightIntakeMotor.set(0.45);
   }
 
   public void stopIntake() {

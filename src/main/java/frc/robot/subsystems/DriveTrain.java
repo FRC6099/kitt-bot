@@ -33,8 +33,8 @@ public class DriveTrain extends SubsystemBase {
   }
   
   public void moveRightMotors(double speed) {
-    rightFrontMotor.set(-speed);
-    rightRearMotor.set(-speed);
+    rightFrontMotor.set(speed);
+    rightRearMotor.set(speed);
   }
 
   public void stop() {
