@@ -93,8 +93,8 @@ public class Intake extends SubsystemBase {
   }
 
   public void moveArm(double speed) {
-    System.out.println("This works right???");
-    System.out.print(armEncoder.getPosition());
+    // System.out.println("This works right???");
+    // System.out.print(armEncoder.getPosition());
     armLeftMotor.set(-speed*0.3);
     armRightMotor.set(speed*0.3);
   

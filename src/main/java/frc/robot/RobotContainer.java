@@ -15,6 +15,7 @@ import frc.robot.commands.autonomous.DriveBackward;
 import frc.robot.commands.autonomous.DriveForward;
 import frc.robot.commands.autonomous.EjectFieldElementAndMove;
 import frc.robot.commands.autonomous.EjectFieldElementAndMoveAngle;
+import frc.robot.commands.autonomous.EjectFieldElementAndMoveCustom;
 import frc.robot.commands.autonomous.EjectTwoFieldElementsSequence;
 import frc.robot.controllers.ClimberController;
 import frc.robot.controllers.TankDriveController;
@@ -77,8 +78,12 @@ public class RobotContainer {
     this.autonomousChooser.addOption("Do nothing", new WaitCommand(10.0));
     this.autonomousChooser.addOption("Drive Backwards", new DriveBackward(driveTrain, 2.0));
     this.autonomousChooser.addOption("Drive Forward", new DriveForward(driveTrain, 2.0));
-    this.autonomousChooser.setDefaultOption("Score coral close", new EjectFieldElementAndMove(intake, driveTrain));
-    this.autonomousChooser.setDefaultOption("Score coral far", new EjectFieldElementAndMoveAngle(intake, driveTrain));
+    this.autonomousChooser.setDefaultOption("Score coral close", new EjectFieldElementAndMove(intake, driveTrain, 1.5));
+    this.autonomousChooser.addOption("Score coral far", new EjectFieldElementAndMove(intake, driveTrain, 3.4));
+
+    
+    SmartDashboard.putNumber("Custom Auton Drive Forward", 1.5);
+    this.autonomousChooser.addOption("Score coral custom", new EjectFieldElementAndMoveCustom(intake, driveTrain));
 
     // this.autonomousChooser.addOption("Score two notes", new EjectTwoFieldElementsSequence(intake, driveTrain));
     SmartDashboard.putData("Autonomous Options", this.autonomousChooser);

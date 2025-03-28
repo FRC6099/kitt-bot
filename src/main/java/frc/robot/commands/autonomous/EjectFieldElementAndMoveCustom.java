@@ -14,16 +14,11 @@ import frc.robot.subsystems.Intake;
 // NOTE:  Consider using this command inline, rather than writing a subclass.  For more
 // information, see:
 // https://docs.wpilib.org/en/stable/docs/software/commandbased/convenience-features.html
-public class EjectFieldElementAndMove extends SequentialCommandGroup {
+public class EjectFieldElementAndMoveCustom extends SequentialCommandGroup {
   /** Creates a new EjectTwoNoteSequence. */
-  public EjectFieldElementAndMove(Intake intake, DriveTrain driveTrain) {
-    this(intake, driveTrain, 1.5);
-  }
-  public EjectFieldElementAndMove(Intake intake, DriveTrain driveTrain, double driveForwardDuration) {
-    // Add your commands in the addCommands() call, e.g.
-    // addCommands(new FooCommand(), new BarCommand());
+  public EjectFieldElementAndMoveCustom(Intake intake, DriveTrain driveTrain) {
     addCommands(
-      new DriveForward(driveTrain, driveForwardDuration),
+      new DriveForwardCustom(driveTrain), // Pulls time from SmartDashboard
       new DriveBackward(driveTrain, 0.1),
       new RetractIntakeArm(intake, 0.5),
       new ExtendIntakeArm(intake, 1.0),
