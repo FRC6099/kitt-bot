@@ -24,7 +24,7 @@ public class EjectFieldElementAndMoveAngle extends SequentialCommandGroup {
       new DriveBackward(driveTrain, 0.1),
       new RetractIntakeArm(intake, 0.5),
       new ExtendIntakeArm(intake, 1.0),
-      new EjectFieldElement(intake, driveTrain)
+      new EjectFieldElement(intake, driveTrain, 0.5)
     );
   }
 }

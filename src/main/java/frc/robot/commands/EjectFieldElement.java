@@ -22,7 +22,7 @@ public class EjectFieldElement extends Command {
 
   /** Creates a new InjectNote. */
   public EjectFieldElement(Intake intake, DriveTrain driveTrain) {
-    this(intake, driveTrain, 0.5);
+    this(intake, driveTrain, 7.0);
   }
 
   public EjectFieldElement(Intake intake, DriveTrain driveTrain, double duration) {
