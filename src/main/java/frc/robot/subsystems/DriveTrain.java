@@ -4,8 +4,6 @@
 
 package frc.robot.subsystems;
 
-import com.ctre.phoenix.motorcontrol.ControlMode;
-import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import com.revrobotics.spark.SparkMax;
 import com.revrobotics.spark.SparkLowLevel.MotorType;
 
@@ -20,7 +18,9 @@ public class DriveTrain extends SubsystemBase {
 
 
   /** Creates a new DriveTrain. */
-  public DriveTrain() {}
+  public DriveTrain() {
+    // TODO: Configure motors to use encoders instead (see update-drivetrain-sample branch)
+  }
 
   @Override
   public void periodic() {
@@ -28,13 +28,13 @@ public class DriveTrain extends SubsystemBase {
   }
 
   public void moveLeftMotors(double speed) {
-    leftFrontMotor.set( speed);
+    leftFrontMotor.set(speed);
     leftRearMotor.set(speed);
   }
   
   public void moveRightMotors(double speed) {
-    rightFrontMotor.set( -speed);
-    rightRearMotor.set( -speed);
+    rightFrontMotor.set(speed);
+    rightRearMotor.set(speed);
   }
 
   public void stop() {

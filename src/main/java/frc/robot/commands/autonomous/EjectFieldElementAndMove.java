@@ -5,22 +5,30 @@
 package frc.robot.commands.autonomous;
 
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
-import frc.robot.commands.EjectNote;
+import frc.robot.commands.EjectFieldElement;
+import frc.robot.commands.ExtendIntakeArm;
+import frc.robot.commands.RetractIntakeArm;
 import frc.robot.subsystems.DriveTrain;
 import frc.robot.subsystems.Intake;
-import frc.robot.subsystems.Shooter;
 
 // NOTE:  Consider using this command inline, rather than writing a subclass.  For more
 // information, see:
 // https://docs.wpilib.org/en/stable/docs/software/commandbased/convenience-features.html
-public class EjectNoteAndMove extends SequentialCommandGroup {
+public class EjectFieldElementAndMove extends SequentialCommandGroup {
   /** Creates a new EjectTwoNoteSequence. */
-  public EjectNoteAndMove(Intake intake, Shooter shooter, DriveTrain driveTrain) {
+  public EjectFieldElementAndMove(Intake intake, DriveTrain driveTrain) {
+    this(intake, driveTrain, 1.5);
+  }
+  public EjectFieldElementAndMove(Intake intake, DriveTrain driveTrain, double driveForwardDuration) {
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
     addCommands(
-      new EjectNote(intake, shooter, driveTrain),
-      new DriveForward(driveTrain, 2.0)
+      new DriveForward(driveTrain, driveForwardDuration),
+      new DriveBackward(driveTrain, 0.1),
+      new RetractIntakeArm(intake, 0.5),
+      new ExtendIntakeArm(intake, 1.0),
+      new EjectFieldElement(intake, driveTrain, 0.5),
+      new RetractIntakeArm(intake, 1.5)
     );
   }
 }

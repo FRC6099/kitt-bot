@@ -4,14 +4,10 @@
 
 package frc.robot.subsystems;
 
-import com.ctre.phoenix.motorcontrol.ControlMode;
-import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
-import com.revrobotics.spark.SparkClosedLoopController;
 import com.revrobotics.spark.SparkMax;
+
 import com.revrobotics.RelativeEncoder;
 import com.revrobotics.spark.SparkLowLevel.MotorType;
-
-import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
@@ -19,10 +15,10 @@ import frc.robot.enums.ArmPosition;
 
 public class Intake extends SubsystemBase {
 
-  private final SparkMax armleftMotor = new SparkMax(Constants.LEFT_ARM_MOTOR_CAN_ID , MotorType.kBrushless);
-  private final SparkMax armrightMotor = new SparkMax(Constants.RIGHT_ARM_MOTOR_CAN_ID, MotorType.kBrushless);
+  private final SparkMax armLeftMotor = new SparkMax(Constants.LEFT_ARM_MOTOR_CAN_ID , MotorType.kBrushless);
+  private final SparkMax armRightMotor = new SparkMax(Constants.RIGHT_ARM_MOTOR_CAN_ID, MotorType.kBrushless);
 
-  private final RelativeEncoder armEncoder = armleftMotor.getEncoder();
+  private final RelativeEncoder armEncoder = armLeftMotor.getEncoder();
   private final SparkMax leftIntakeMotor = new SparkMax(Constants.LEFT_INTAKE_MOTOR_CAN_ID, MotorType.kBrushless);
   private final SparkMax rightIntakeMotor = new SparkMax(Constants.RIGHT_INTAKE_MOTOR_CAN_ID, MotorType.kBrushless);
 
@@ -84,40 +80,40 @@ public class Intake extends SubsystemBase {
 
   public void moveArm(ArmPosition position) {
     if (ArmPosition.HOME == position) {
-      armleftMotor.set(0.2);
-      armrightMotor.set(0.2);
+      armLeftMotor.set(-0.2);
+      armRightMotor.set(0.2);
 
       // armPID.setReference(0, ControlType.kPosition);
     } else if (ArmPosition.EXTENDED == position) {
-      armleftMotor.set(-0.2);
-      armrightMotor.set(-0.2);
+      armLeftMotor.set(0.2);
+      armRightMotor.set(-0.2);
       // TODO: Get Actual Position for EXTENDED
       // armPID.setReference(90, ControlType.kPosition);
     }
   }
 
   public void moveArm(double speed) {
-    armleftMotor.set(speed);
-    armrightMotor.set(speed);
+    // System.out.println("This works right???");
+    // System.out.print(armEncoder.getPosition());
+    armLeftMotor.set(-speed*0.3);
+    armRightMotor.set(speed*0.3);
   
   }
 
   public void stopArm() {
-    armleftMotor.set(0.0);
-    armrightMotor.set(0.0);
+    armLeftMotor.set(0.0);
+    armRightMotor.set(0.0);
     // armPID.setReference(0.0, ControlType.kVoltage);
   }
 
   public void inject() {
-    leftIntakeMotor.set( 0.75);
-    rightIntakeMotor.set( 0.75);
-
+    leftIntakeMotor.set(-0.45);
+    rightIntakeMotor.set( -0.45);
   }
 
   public void eject() {
-    leftIntakeMotor.set( -0.75);
-    rightIntakeMotor.set( -0.75);
-
+    leftIntakeMotor.set( 0.45);
+    rightIntakeMotor.set(0.45);
   }
 
   public void stopIntake() {
@@ -137,7 +133,7 @@ public class Intake extends SubsystemBase {
     return ArmPosition.OUT_OF_POSITION;
   }
 
-  public boolean isNotePresent() {
+  public boolean isElementPresent() {
     return true;
   }
 

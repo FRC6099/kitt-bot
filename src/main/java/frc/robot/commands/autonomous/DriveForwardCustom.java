@@ -5,39 +5,33 @@
 package frc.robot.commands.autonomous;
 
 import edu.wpi.first.wpilibj.Timer;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.subsystems.DriveTrain;
 
-public class DriveBackward extends Command {
+public class DriveForwardCustom extends Command {
    private final DriveTrain driveTrain;
-  private final double duration;
   private final Timer timer;
-
-  public DriveBackward(DriveTrain driveTrain) {
-    this(driveTrain, 2.0);
-  }
-
-  public DriveBackward(DriveTrain driveTrain, double duration) {
-    this(driveTrain, duration, new Timer());
-  }
+  private double duration;
 
   /** Creates a new Reverse. */
-  public DriveBackward(DriveTrain driveTrain, double duration, Timer timer) {
+  public DriveForwardCustom(DriveTrain driveTrain) {
     // Use addRequirements() here to declare subsystem dependencies.
     this.driveTrain = driveTrain;
-    this.duration = duration;
-    this.timer = timer;
+    this.timer = new Timer();
     addRequirements(driveTrain);
   }
 
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    driveTrain.moveLeftMotors(-0.2);
-    driveTrain.moveRightMotors(-0.2);
+    this.duration = SmartDashboard.getNumber("Custom Auton Drive Forward", 1.5);
+    System.out.println("Duration is set to: " + duration);
+    driveTrain.moveLeftMotors(0.2);
+    driveTrain.moveRightMotors(0.2);
     timer.reset();
     timer.start();
-    System.out.println("** Moving Backward");
+    System.out.println("** Moving Forward");
   }
 
   // Called every time the scheduler runs while the command is scheduled.
@@ -49,7 +43,7 @@ public class DriveBackward extends Command {
   public void end(boolean interrupted) {
     driveTrain.stop();
     timer.stop();
-    System.out.println("** Moving Backward Complete");
+    System.out.println("** Moving Forward Complete");
   }
 
   // Returns true when the command should end.

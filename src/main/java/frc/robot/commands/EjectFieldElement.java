@@ -9,39 +9,42 @@ import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.enums.ArmPosition;
 import frc.robot.subsystems.DriveTrain;
 import frc.robot.subsystems.Intake;
-import frc.robot.subsystems.Shooter;
 
-public class EjectNote extends Command {
+public class EjectFieldElement extends Command {
   private final Intake intake;
-  private final Shooter shooter;
   private final DriveTrain driveTrain;
   private final Timer timer = new Timer();
 
-  private boolean wasNotePresent = false;
+  private boolean wasElementPresent = false;
   private boolean isTimerStarted = false;
+  private final double duration;
+
 
   /** Creates a new InjectNote. */
-  public EjectNote(Intake intake, Shooter shooter, DriveTrain driveTrain) {
+  public EjectFieldElement(Intake intake, DriveTrain driveTrain) {
+    this(intake, driveTrain, 7.0);
+  }
+
+  public EjectFieldElement(Intake intake, DriveTrain driveTrain, double duration) {
     this.intake = intake;
-    this.shooter = shooter;
     this.driveTrain = driveTrain;
-    addRequirements(intake, shooter, driveTrain);
+    this.duration=duration;
+    addRequirements(intake, driveTrain);
   }
 
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
     this.driveTrain.stop();
+    timer.reset();
+    timer.start();
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
     if (!isFinished()) {
-      if (this.shooter.isPrimed()) {
-        this.intake.eject();
-      }
-      this.shooter.prime();
+      this.intake.eject();
     }
   }
 
@@ -49,33 +52,33 @@ public class EjectNote extends Command {
   @Override
   public void end(boolean interrupted) {
     this.intake.stopIntake();
-    this.shooter.stop();
     this.timer.stop();
-    this.wasNotePresent = false;
+    this.wasElementPresent = false;
     this.isTimerStarted = false;
   }
 
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return !this.getWasNotePresent(); // || ArmPosition.HOME != this.intake.getArmPosition();
+    //return !this.getWasElementPresent(); // || ArmPosition.HOME != this.intake.getArmPosition();
+    return timer.hasElapsed(duration);
   }
 
-  private boolean getWasNotePresent() {
-    if (wasNotePresent && isTimerStarted && timer.hasElapsed(2.0)) {
-      wasNotePresent = false;
+  private boolean getWasElementPresent() {
+    if (wasElementPresent && isTimerStarted && timer.hasElapsed(2.0)) {
+      wasElementPresent = false;
       isTimerStarted = false;
       timer.stop();
     }
 
-    if (this.intake.isNotePresent()) {
-      wasNotePresent = true;
-    } else if (wasNotePresent && !isTimerStarted) {
+    if (this.intake.isElementPresent()) {
+      wasElementPresent = true;
+    } else if (wasElementPresent && !isTimerStarted) {
       isTimerStarted = true;
       this.timer.reset();
       timer.start();
     }
 
-    return wasNotePresent;
+    return wasElementPresent;
   }
 }

@@ -37,27 +37,4 @@ public final class Constants {
     
     // CLIMB MOTORS 
     public static final int CLIMBER_MOTOR_CAN_ID = 6;
-
-
-    // TODO: CLEANUP BELOW CONSTANTS AFTER SUBSYSTEMS ARE UPDATED
-
-    // Intake Arm
-    public static final int INTAKE_ARM_MOTOR_CAN_ID = 105;
-    public static final int INTAKE_GRABBER_MOTOR_CAN_ID = 106;
-
-    // Shooter
-    public static final int LEFT_SHOOTER_ARM_MOTOR_CAN_ID = 107;
-    public static final int RIGHT_SHOOTER_ARM_MOTOR_CAN_ID = 108;
-
-    // Climber
-    public static final int LEFT_CLIMBER_MOTOR_CAN_ID = 109;
-    public static final int RIGHT_CLIMBER_MOTOR_CAN_ID = 1010;
-
-    /*** Relays ***/
-    // Climber
-    public static final int LEFT_CLIMBER_RELAY_ID = 0;
-    public static final int RIGHT_CLIMBER_RELAY_ID = 1;
-
-    /*** Digital IO ***/
-    public static final int NOTE_LIMIT_SWITCH = 0;
 }
