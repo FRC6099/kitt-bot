@@ -7,12 +7,10 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.enums.ArmPosition;
-import frc.robot.subsystems.DriveTrain;
 import frc.robot.subsystems.Intake;
 
 public class EjectFieldElement extends Command {
   private final Intake intake;
-  private final DriveTrain driveTrain;
   private final Timer timer = new Timer();
 
   private boolean wasElementPresent = false;
@@ -21,21 +19,19 @@ public class EjectFieldElement extends Command {
 
 
   /** Creates a new InjectNote. */
-  public EjectFieldElement(Intake intake, DriveTrain driveTrain) {
-    this(intake, driveTrain, 7.0);
+  public EjectFieldElement(Intake intake) {
+    this(intake, 7.0);
   }
 
-  public EjectFieldElement(Intake intake, DriveTrain driveTrain, double duration) {
+  public EjectFieldElement(Intake intake, double duration) {
     this.intake = intake;
-    this.driveTrain = driveTrain;
     this.duration=duration;
-    addRequirements(intake, driveTrain);
+    addRequirements(intake);
   }
 
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    this.driveTrain.stop();
     timer.reset();
     timer.start();
   }

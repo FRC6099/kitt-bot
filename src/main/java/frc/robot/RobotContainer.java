@@ -52,7 +52,7 @@ public class RobotContainer {
   private final ExtendIntakeArm extendIntakeArm = new ExtendIntakeArm(intake);
   private final RetractIntakeArm retractIntakeArm = new RetractIntakeArm(intake);
   private final InjectFieldElement injectFieldElement = new InjectFieldElement(intake);
-  private final EjectFieldElement ejectFieldElement = new EjectFieldElement(intake, driveTrain);
+  private final EjectFieldElement ejectFieldElement = new EjectFieldElement(intake);
   private final OperateClimber operateClimber = new OperateClimber(new ClimberController(xboxController), climber);
   private final DetectArmPosition detectArmPosition = new DetectArmPosition(intake);
 
