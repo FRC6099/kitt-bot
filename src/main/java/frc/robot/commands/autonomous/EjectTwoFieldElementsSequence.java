@@ -24,7 +24,7 @@ public class EjectTwoFieldElementsSequence extends SequentialCommandGroup {
     InjectFieldElement injectNote = new InjectFieldElement(intake);
     DriveForward driveForward = new DriveForward(driveTrain, 2.0);
     addCommands(
-      new EjectFieldElement(intake, driveTrain),
+      new EjectFieldElement(intake),
       new ExtendIntakeArm(intake, 2.0),
       new ParallelCommandGroup(
         injectNote, 
@@ -35,7 +35,7 @@ public class EjectTwoFieldElementsSequence extends SequentialCommandGroup {
           new RetractIntakeArm(intake, 2.0),
           new DriveBackward(driveTrain, 1.75),     
           //),
-      new EjectFieldElement(intake, driveTrain)
+      new EjectFieldElement(intake)
     );
   }
 }
