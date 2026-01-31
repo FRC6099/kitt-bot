@@ -13,7 +13,28 @@ package frc.robot;
  * constants are needed, to reduce verbosity.
  */
 public final class Constants {
-  public static class OperatorConstants {
-    public static final int kDriverControllerPort = 0;
-  }
+    /*** USB Ports  ***/
+    public static final int XBOX_CONTROLLER_USB_ID = 0;
+    public static final int LEFT_JOYSTICK_USB_ID = 1;
+    public static final int RIGHT_JOYSTICK_USB_ID = 2;
+
+    /*** CAN IDs  ***/
+    // Drive Train
+    public static final int RIGHT_FRONT_DRIVE_MOTOR_CAN_ID = 2;
+    public static final int RIGHT_REAR_DRIVE_MOTOR_CAN_ID = 3;
+    public static final int LEFT_FRONT_DRIVE_MOTOR_CAN_ID = 1;
+    public static final int LEFT_REAR_DRIVE_MOTOR_CAN_ID = 9;
+
+    // Arm Motors
+
+    public static final int RIGHT_ARM_MOTOR_CAN_ID = 4;
+    public static final int LEFT_ARM_MOTOR_CAN_ID = 8;
+
+
+    // iNTAKE MOTORS 
+    public static final int RIGHT_INTAKE_MOTOR_CAN_ID = 5;
+    public static final int LEFT_INTAKE_MOTOR_CAN_ID = 7;
+    
+    // CLIMB MOTORS 
+    public static final int CLIMBER_MOTOR_CAN_ID = 6;
 }

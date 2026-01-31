@@ -4,11 +4,29 @@
 
 package frc.robot;
 
-import frc.robot.Constants.OperatorConstants;
-import frc.robot.commands.Autos;
-import frc.robot.commands.ExampleCommand;
-import frc.robot.subsystems.ExampleSubsystem;
+import frc.robot.commands.DetectArmPosition;
+import frc.robot.commands.EjectFieldElement;
+import frc.robot.commands.ExtendIntakeArm;
+import frc.robot.commands.InjectFieldElement;
+import frc.robot.commands.OperateClimber;
+import frc.robot.commands.RetractIntakeArm;
+import frc.robot.commands.TankDrive;
+import frc.robot.commands.autonomous.DriveBackward;
+import frc.robot.commands.autonomous.DriveForward;
+import frc.robot.commands.autonomous.EjectFieldElementAndMove;
+import frc.robot.commands.autonomous.EjectFieldElementAndMoveAngle;
+import frc.robot.commands.autonomous.EjectFieldElementAndMoveCustom;
+import frc.robot.commands.autonomous.EjectTwoFieldElementsSequence;
+import frc.robot.controllers.ClimberController;
+import frc.robot.controllers.TankDriveController;
+import frc.robot.subsystems.Climber;
+import frc.robot.subsystems.DriveTrain;
+import frc.robot.subsystems.Intake;
+import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.wpilibj2.command.WaitCommand;
+import edu.wpi.first.wpilibj2.command.button.CommandJoystick;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
 
@@ -20,16 +38,56 @@ import edu.wpi.first.wpilibj2.command.button.Trigger;
  */
 public class RobotContainer {
   // The robot's subsystems and commands are defined here...
-  private final ExampleSubsystem m_exampleSubsystem = new ExampleSubsystem();
+  private final DriveTrain driveTrain = new DriveTrain();
+  private final Intake intake = new Intake();
+  private final Climber climber = new Climber();
 
   // Replace with CommandPS4Controller or CommandJoystick if needed
-  private final CommandXboxController m_driverController =
-      new CommandXboxController(OperatorConstants.kDriverControllerPort);
+  private final CommandXboxController xboxController = new CommandXboxController(Constants.XBOX_CONTROLLER_USB_ID);
+  private final CommandJoystick leftJoystick = new CommandJoystick(Constants.LEFT_JOYSTICK_USB_ID);
+  private final CommandJoystick rightJoystick = new CommandJoystick(Constants.RIGHT_JOYSTICK_USB_ID);
+
+  // Default commands
+  private final TankDrive tankDrive = new TankDrive(driveTrain, new TankDriveController(leftJoystick, rightJoystick));
+  private final ExtendIntakeArm extendIntakeArm = new ExtendIntakeArm(intake);
+  private final RetractIntakeArm retractIntakeArm = new RetractIntakeArm(intake);
+  private final InjectFieldElement injectFieldElement = new InjectFieldElement(intake);
+  private final EjectFieldElement ejectFieldElement = new EjectFieldElement(intake);
+  private final OperateClimber operateClimber = new OperateClimber(new ClimberController(xboxController), climber);
+  private final DetectArmPosition detectArmPosition = new DetectArmPosition(intake);
+
+  // Autonomous Commands
+  // Add ability to choose autonomous mode in SmartDashboard
+  private final SendableChooser<Command> autonomousChooser = new SendableChooser<>();
 
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
     // Configure the trigger bindings
     configureBindings();
+    configureSubsystems();
+    configureAutonomousModes();
+  }
+
+  private void configureSubsystems() {
+    this.driveTrain.setDefaultCommand(tankDrive);
+    this.climber.setDefaultCommand(operateClimber);
+    this.intake.setDefaultCommand(detectArmPosition);
+  }
+
+  private void configureAutonomousModes() {
+    this.autonomousChooser.addOption("Do nothing", new WaitCommand(10.0));
+    this.autonomousChooser.addOption("Drive Backwards", new DriveBackward(driveTrain, 2.0));
+    this.autonomousChooser.addOption("Drive Forward", new DriveForward(driveTrain, 2.0));
+    this.autonomousChooser.setDefaultOption("Score coral close", new EjectFieldElementAndMove(intake, driveTrain, 1.5));
+    this.autonomousChooser.addOption("Score coral far", new EjectFieldElementAndMove(intake, driveTrain, 3.4));
+
+    
+    SmartDashboard.putNumber("Custom Auton Drive Forward", 1.5);
+    this.autonomousChooser.addOption("Score coral custom", new EjectFieldElementAndMoveCustom(intake, driveTrain));
+
+    // this.autonomousChooser.addOption("Score two notes", new EjectTwoFieldElementsSequence(intake, driveTrain));
+    SmartDashboard.putData("Autonomous Options", this.autonomousChooser);
+    // SmartDashboard.putNumber("Autonomous Number", 0);
   }
 
   /**
@@ -43,12 +101,19 @@ public class RobotContainer {
    */
   private void configureBindings() {
     // Schedule `ExampleCommand` when `exampleCondition` changes to `true`
-    new Trigger(m_exampleSubsystem::exampleCondition)
-        .onTrue(new ExampleCommand(m_exampleSubsystem));
+    // new Trigger(m_exampleSubsystem::exampleCondition)
+    //     .onTrue(new ExampleCommand(m_exampleSubsystem));
 
     // Schedule `exampleMethodCommand` when the Xbox controller's B button is pressed,
     // cancelling on release.
-    m_driverController.b().whileTrue(m_exampleSubsystem.exampleMethodCommand());
+    // m_driverController.b().whileTrue(m_exampleSubsystem.exampleMethodCommand());
+    xboxController.leftBumper().whileTrue(extendIntakeArm);
+    xboxController.rightBumper().whileTrue(retractIntakeArm);
+    xboxController.leftTrigger().whileTrue(injectFieldElement);
+    xboxController.rightTrigger().whileTrue(ejectFieldElement);
+    // xboxController.a()
+    // .whileTrue(new RunCommand(() -> shooter.prime(), shooter))
+    // .whileFalse(new RunCommand(() -> shooter.stop(), shooter));
   }
 
   /**
@@ -58,6 +123,6 @@ public class RobotContainer {
    */
   public Command getAutonomousCommand() {
     // An example command will be run in autonomous
-    return Autos.exampleAuto(m_exampleSubsystem);
+    return autonomousChooser.getSelected();
   }
 }
