@@ -23,7 +23,6 @@ public class Robot extends TimedRobot {
 
   private RobotContainer m_robotContainer;
   private UsbCamera camera1;
-  private UsbCamera camera2;
 
   /**
    * This function is run when the robot is first started up and should be used for any
@@ -35,7 +34,6 @@ public class Robot extends TimedRobot {
     // autonomous chooser on the dashboard.
     m_robotContainer = new RobotContainer();
     camera1 = startCamera();
-    camera2 = startCamera();
   }
 
   private UsbCamera startCamera() {
