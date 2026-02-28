@@ -59,6 +59,41 @@ public final class Constants {
     public static final boolean kGyroReversed = false;
   }
 
+  public static final class IntakeSubsystemConstants {
+    public static final int kIntakeMotorCanId = 2; // SPARK Flex CAN ID
+    public static final int kConveyorMotorCanId = 4; // SPARK Flex CAN ID
+
+    public static final class IntakeSetpoints {
+      public static final double kIntake = 0.6;
+      public static final double kExtake = -0.6;
+    }
+
+    public static final class ConveyorSetpoints {
+      public static final double kIntake = 0.7;
+      public static final double kExtake = -0.7;
+    }
+  }
+
+  public static final class ShooterSubsystemConstants {
+    public static final int kFeederMotorCanId = 5; // SPARK Flex CAN ID
+    public static final int kFlywheelMotorCanId = 6; // SPARK Flex CAN ID (Right)
+    public static final int kFlywheelFollowerMotorCanId = 7; // SPARK Flex CAN ID (Left)
+
+    public static final class FeederSetpoints {
+      public static final double kFeed = 0.95;
+    }
+
+    public static final class FlywheelSetpoints {
+      public static final double kShootRpm = 5000;
+      public static final double kVelocityTolerance = 100;
+    }
+  }
+
+  public static final class NeoMotorConstants {
+    public static final double kFreeSpeedRpm = 5676;
+    public static final double kVortexKv = 565; // rpm/V
+  }
+
   public static final class ModuleConstants {
     // The MAXSwerve module can be configured with one of three pinion gears: 12T,
     // 13T, or 14T. This changes the drive speed of the module (a pinion gear with
@@ -79,6 +114,7 @@ public final class Constants {
   public static final class OIConstants {
     public static final int kDriverControllerPort = 0;
     public static final double kDriveDeadband = 0.05;
+    public static final double kTriggerButtonThreshold = 0.2;
   }
 
   public static final class AutoConstants {
@@ -94,9 +130,5 @@ public final class Constants {
     // Constraint for the motion profiled robot angle controller
     public static final TrapezoidProfile.Constraints kThetaControllerConstraints = new TrapezoidProfile.Constraints(
         kMaxAngularSpeedRadiansPerSecond, kMaxAngularSpeedRadiansPerSecondSquared);
-  }
-
-  public static final class NeoMotorConstants {
-    public static final double kFreeSpeedRpm = 5676;
   }
 }

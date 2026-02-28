@@ -1,0 +1,66 @@
+<xml version="1.0">
+<dashboard>
+	<widget field="Intake | Intake | Applied Output" type="Number" class="edu.wpi.first.smartdashboard.gui.elements.TextBox">
+		<location x="271" y="198"/>
+	</widget>
+	<widget field="Scheduler" type="Scheduler" class="edu.wpi.first.smartdashboard.gui.elements.Scheduler">
+		<location x="0" y="5"/>
+	</widget>
+	<widget field="SANITY" type="Number" class="edu.wpi.first.smartdashboard.gui.elements.TextBox">
+		<location x="280" y="5"/>
+	</widget>
+	<widget field="Bat Voltage" type="Number" class="edu.wpi.first.smartdashboard.gui.elements.TextBox">
+		<location x="280" y="35"/>
+	</widget>
+	<widget field="ShooterSubsystem" type="Subsystem" class="edu.wpi.first.smartdashboard.gui.elements.Subsystem">
+		<location x="270" y="270"/>
+	</widget>
+	<widget field="Flywheel" type="Command" class="edu.wpi.first.smartdashboard.gui.elements.Command">
+		<location x="265" y="300"/>
+	</widget>
+	<widget field="Feeder" type="Command" class="edu.wpi.first.smartdashboard.gui.elements.Command">
+		<location x="400" y="300"/>
+	</widget>
+	<widget field="Shooter | Feeder | Applied Output" type="Number" class="edu.wpi.first.smartdashboard.gui.elements.TextBox">
+		<location x="270" y="330"/>
+	</widget>
+	<widget field="Shooter | Flywheel | Target Velocity" type="Number" class="edu.wpi.first.smartdashboard.gui.elements.TextBox">
+		<location x="270" y="360"/>
+	</widget>
+	<widget field="Shooter | Flywheel | Actual Velocity" type="Number" class="edu.wpi.first.smartdashboard.gui.elements.TextBox">
+		<location x="270" y="390"/>
+	</widget>
+	<widget field="Shooter | Flywheel | Current" type="Number" class="edu.wpi.first.smartdashboard.gui.elements.TextBox">
+		<location x="270" y="420"/>
+	</widget>
+	<widget field="Shooter | Flywheel | Applied Output" type="Number" class="edu.wpi.first.smartdashboard.gui.elements.TextBox">
+		<location x="270" y="450"/>
+	</widget>
+	<widget field="Shooter | Flywheel Follower | Current" type="Number" class="edu.wpi.first.smartdashboard.gui.elements.TextBox">
+		<location x="270" y="480"/>
+	</widget>
+	<widget field="Shooter | Flywheel Follower | Applied Output" type="Number" class="edu.wpi.first.smartdashboard.gui.elements.TextBox">
+		<location x="270" y="510"/>
+	</widget>
+	<widget field="IntakeSubsystem" type="Subsystem" class="edu.wpi.first.smartdashboard.gui.elements.Subsystem">
+		<location x="270" y="100"/>
+	</widget>
+	<widget field="Intake" type="Command" class="edu.wpi.first.smartdashboard.gui.elements.Command">
+		<location x="265" y="130"/>
+	</widget>
+	<widget field="Extake" type="Command" class="edu.wpi.first.smartdashboard.gui.elements.Command">
+		<location x="265" y="160"/>
+	</widget>
+	<widget field="Intake | Conveyor | Applied Output" type="Number" class="edu.wpi.first.smartdashboard.gui.elements.TextBox">
+		<location x="270" y="220"/>
+	</widget>
+	<widget field="Is Flywheel Stopped" type="Boolean" class="edu.wpi.first.smartdashboard.gui.elements.TextBox">
+		<location x="58" y="450"/>
+	</widget>
+	<widget field="Is Flywheel Spinning" type="Boolean" class="edu.wpi.first.smartdashboard.gui.elements.TextBox">
+		<location x="59" y="480"/>
+	</widget>
+</dashboard>
+<live-window>
+</live-window>
+</xml>
