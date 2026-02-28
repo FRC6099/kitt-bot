@@ -8,6 +8,7 @@ import edu.wpi.first.cameraserver.CameraServer;
 import edu.wpi.first.cscore.UsbCamera;
 import edu.wpi.first.cscore.VideoSource.ConnectionStrategy;
 import edu.wpi.first.util.PixelFormat;
+import edu.wpi.first.wpilibj.DataLogManager;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
@@ -37,12 +38,17 @@ public class Robot extends TimedRobot {
   }
 
   private UsbCamera startCamera() {
-    UsbCamera camera1 = CameraServer.startAutomaticCapture();
-    camera1.setConnectionStrategy(ConnectionStrategy.kKeepOpen);
-    camera1.setVideoMode(PixelFormat.kMJPEG, 120, 90, 15);
-    camera1.setExposureManual(40);
-    camera1.setWhiteBalanceHoldCurrent();
-    return camera1;
+    try {
+      UsbCamera camera1 = CameraServer.startAutomaticCapture();
+      camera1.setConnectionStrategy(ConnectionStrategy.kKeepOpen);
+      camera1.setVideoMode(PixelFormat.kMJPEG, 120, 90, 15);
+      camera1.setExposureManual(40);
+      camera1.setWhiteBalanceHoldCurrent();
+      return camera1;
+    } catch (Exception exception) {
+      DataLogManager.log("Camera error: " + exception.getMessage());
+    }
+    return null;
   }
 
   /**
