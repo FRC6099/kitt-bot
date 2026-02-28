@@ -6,7 +6,7 @@ package frc.robot.subsystems;
 
 import com.revrobotics.PersistMode;
 import com.revrobotics.ResetMode;
-import com.revrobotics.spark.SparkFlex;
+import com.revrobotics.spark.SparkMax;
 import com.revrobotics.spark.SparkLowLevel.MotorType;
 
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -19,12 +19,12 @@ import frc.robot.Constants.IntakeSubsystemConstants.IntakeSetpoints;
 
 public class IntakeSubsystem extends SubsystemBase {
   // Initialize intake SPARK. We will use open loop control for this.
-  private SparkFlex intakeMotor =
-      new SparkFlex(IntakeSubsystemConstants.kIntakeMotorCanId, MotorType.kBrushless);
+  private SparkMax intakeMotor =
+      new SparkMax(IntakeSubsystemConstants.kIntakeMotorCanId, MotorType.kBrushless);
 
   // Initialize conveyor SPARK. We will use open loop control for this.
-  private SparkFlex conveyorMotor =
-      new SparkFlex(IntakeSubsystemConstants.kConveyorMotorCanId, MotorType.kBrushless);
+  private SparkMax conveyorMotor =
+      new SparkMax(IntakeSubsystemConstants.kConveyorMotorCanId, MotorType.kBrushless);
 
   /** Creates a new IntakeSubsystem. */
   public IntakeSubsystem() {

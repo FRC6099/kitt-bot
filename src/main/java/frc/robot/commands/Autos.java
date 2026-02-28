@@ -24,47 +24,43 @@ public final class Autos {
 
   public static Command exampleAuto(DriveSubsystem drive) {
     // Create config for trajectory
-    TrajectoryConfig config =
-        new TrajectoryConfig(
+        TrajectoryConfig config = new TrajectoryConfig(
                 AutoConstants.kMaxSpeedMetersPerSecond,
                 AutoConstants.kMaxAccelerationMetersPerSecondSquared)
-            // Add kinematics to ensure max speed is actually obeyed
-            .setKinematics(DriveConstants.kDriveKinematics);
+                // Add kinematics to ensure max speed is actually obeyed
+                .setKinematics(DriveConstants.kDriveKinematics);
 
-    // An example trajectory to follow. All units in meters.
-    Trajectory exampleTrajectory =
-        TrajectoryGenerator.generateTrajectory(
-            // Start at the origin facing the +X direction
-            new Pose2d(0, 0, new Rotation2d(0)),
-            // Pass through these two interior waypoints, making an 's' curve path
-            List.of(new Translation2d(1, 1), new Translation2d(2, -1)),
-            // End 3 meters straight ahead of where we started, facing forward
-            new Pose2d(3, 0, new Rotation2d(0)),
-            config);
+        // An example trajectory to follow. All units in meters.
+        Trajectory exampleTrajectory = TrajectoryGenerator.generateTrajectory(
+                // Start at the origin facing the +X direction
+                new Pose2d(0, 0, new Rotation2d(0)),
+                // Pass through these two interior waypoints, making an 's' curve path
+                List.of(new Translation2d(1, 1), new Translation2d(2, -1)),
+                // End 3 meters straight ahead of where we started, facing forward
+                new Pose2d(3, 0, new Rotation2d(0)),
+                config);
 
-    var thetaController =
-        new ProfiledPIDController(
-            AutoConstants.kPThetaController, 0, 0, AutoConstants.kThetaControllerConstraints);
-    thetaController.enableContinuousInput(-Math.PI, Math.PI);
+        var thetaController = new ProfiledPIDController(
+                AutoConstants.kPThetaController, 0, 0, AutoConstants.kThetaControllerConstraints);
+        thetaController.enableContinuousInput(-Math.PI, Math.PI);
 
-    SwerveControllerCommand swerveControllerCommand =
-        new SwerveControllerCommand(
-            exampleTrajectory,
-            drive::getPose, // Functional interface to feed supplier
-            DriveConstants.kDriveKinematics,
+        SwerveControllerCommand swerveControllerCommand = new SwerveControllerCommand(
+                exampleTrajectory,
+                drive::getPose, // Functional interface to feed supplier
+                DriveConstants.kDriveKinematics,
 
-            // Position controllers
-            new PIDController(AutoConstants.kPXController, 0, 0),
-            new PIDController(AutoConstants.kPYController, 0, 0),
-            thetaController,
-            drive::setModuleStates,
-            drive);
+                // Position controllers
+                new PIDController(AutoConstants.kPXController, 0, 0),
+                new PIDController(AutoConstants.kPYController, 0, 0),
+                thetaController,
+                drive::setModuleStates,
+                drive);
 
-    // Reset odometry to the starting pose of the trajectory.
-    drive.resetOdometry(exampleTrajectory.getInitialPose());
+        // Reset odometry to the starting pose of the trajectory.
+        drive.resetOdometry(exampleTrajectory.getInitialPose());
 
-    // Run path following command, then stop at the end.
-    return swerveControllerCommand.andThen(() -> drive.drive(0, 0, 0, false));
+        // Run path following command, then stop at the end.
+        return swerveControllerCommand.andThen(() -> drive.drive(0, 0, 0, false));
   }
 
   private Autos() {
