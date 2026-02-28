@@ -23,6 +23,7 @@ import frc.robot.Constants.OIConstants;
 import frc.robot.subsystems.DriveSubsystem;
 import frc.robot.subsystems.IntakeSubsystem;
 import frc.robot.subsystems.ShooterSubsystem;
+import frc.robot.subsystems.SlapperSubsystem;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.RunCommand;
@@ -42,6 +43,7 @@ public class RobotContainer {
     private final DriveSubsystem m_robotDrive = new DriveSubsystem();
     private final IntakeSubsystem m_intake = new IntakeSubsystem();
     private final ShooterSubsystem m_shooter = new ShooterSubsystem();
+    private final SlapperSubsystem m_slapper = new SlapperSubsystem();
 
     // The driver's controller
     XboxController m_driverController = new XboxController(OIConstants.kDriverControllerPort);
@@ -67,6 +69,8 @@ public class RobotContainer {
                                 -MathUtil.applyDeadband(m_driverController.getRightX(), OIConstants.kDriveDeadband),
                                 true),
                         m_robotDrive));
+
+        m_slapper.setDefaultCommand(new RunCommand(() -> m_slapper.stop(), m_slapper));
         SmartDashboard.putData(m_intake);
         SmartDashboard.putData(m_shooter);
 
@@ -109,6 +113,16 @@ public class RobotContainer {
         m_operatorController
                 .leftTrigger(OIConstants.kTriggerButtonThreshold)
                 .whileTrue(m_intake.runExtakeCommand());
+
+        // Left Bumper -> Slapper Up
+        m_operatorController
+                .leftBumper()
+                .whileTrue(new RunCommand(() -> m_slapper.retract(), m_slapper));
+
+        // Right Bumper -> Slapper Down
+        m_operatorController
+                .leftBumper()
+                .whileTrue(new RunCommand(() -> m_slapper.extend(), m_slapper));
 
         // Y Button -> Run intake and run the shooter flywheel and feeder
         m_operatorController.y().toggleOnTrue(m_shooter.runShooterCommand().alongWith(m_intake.runIntakeCommand()));

@@ -89,6 +89,11 @@ public final class Constants {
     }
   }
 
+  public static final class SlapperSubsystemConstants {
+    public static final int kSlapperMotorCanId = 16;
+    public static double kSlapperSpeed = 0.3;
+  }
+
   public static final class NeoMotorConstants {
     public static final double kFreeSpeedRpm = 5676;
     public static final double kVortexKv = 565; // rpm/V
