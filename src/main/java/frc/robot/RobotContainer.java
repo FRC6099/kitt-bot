@@ -70,6 +70,7 @@ public class RobotContainer {
 
         SmartDashboard.putData("Feeder", m_shooter.runFeederCommand().withName("Shooter - Feeding and Shooting"));
         SmartDashboard.putData("Flywheel", m_shooter.runFlywheelCommand().withName("Shooter - Spinning up Flywheel"));
+        SmartDashboard.putBoolean("Enable Pigeon", false);
 
     }
 

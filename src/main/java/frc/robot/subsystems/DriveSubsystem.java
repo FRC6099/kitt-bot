@@ -19,6 +19,8 @@ import edu.wpi.first.math.kinematics.SwerveModulePosition;
 import edu.wpi.first.math.kinematics.SwerveModuleState;
 import edu.wpi.first.wpilibj.ADIS16470_IMU;
 import edu.wpi.first.wpilibj.ADIS16470_IMU.IMUAxis;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import frc.robot.Configs;
 import frc.robot.Constants;
 import frc.robot.Constants.DriveConstants;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
@@ -47,7 +49,7 @@ public class DriveSubsystem extends SubsystemBase {
 
   // The gyro sensor
   private final ADIS16470_IMU m_gyro = new ADIS16470_IMU();
-  private final Pigeon2 pigeon2 = new Pigeon2(Constants.DriveConstants.kPigeonCanId);
+  private final Pigeon2 m_pigeon2 = new Pigeon2(Constants.DriveConstants.kPigeonCanId);
 
   // Odometry class for tracking robot pose
   SwerveDriveOdometry m_odometry = new SwerveDriveOdometry(
@@ -168,7 +170,7 @@ public class DriveSubsystem extends SubsystemBase {
   /** Zeroes the heading of the robot. */
   public void zeroHeading() {
     m_gyro.reset();
-    pigeon2.reset();
+    m_pigeon2.reset();
   }
 
   /**
@@ -190,17 +192,16 @@ public class DriveSubsystem extends SubsystemBase {
   }
 
   private double getRobotAngle() {
-    if (Constants.DriveConstants.kUseImu) {
-      return m_gyro.getAngle(IMUAxis.kZ);
+    if (Configs.MAXSwerveModule.isPigeonEnabled()) {
+      return m_pigeon2.getYaw().getValueAsDouble();
     }
-    return pigeon2.getYaw().getValueAsDouble();
+      return m_gyro.getAngle(IMUAxis.kZ);
   }
 
   private double getRobotTurnRate() {
-    if (Constants.DriveConstants.kUseImu) {
-      return m_gyro.getRate(IMUAxis.kZ);
+    if (Configs.MAXSwerveModule.isPigeonEnabled()) {
+      return m_pigeon2.getAngularVelocityZDevice().getValueAsDouble();
     }
-
-    return pigeon2.getAngularVelocityZDevice().getValueAsDouble();
+      return m_gyro.getRate(IMUAxis.kZ);
   }
 }
