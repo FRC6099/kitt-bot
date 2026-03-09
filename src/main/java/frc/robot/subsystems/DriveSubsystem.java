@@ -169,8 +169,31 @@ public class DriveSubsystem extends SubsystemBase {
 
   /** Zeroes the heading of the robot. */
   public void zeroHeading() {
+    // Reset the odometry if you're trying to use path finding during teleop
+    // resetOdometry(
+    //     new Pose2d(
+    //         getPose().getTranslation(), // Keep current X, Y
+    //         new Rotation2d(0)           // Reset Theta to 0
+    //     )
+    // )
     m_gyro.reset();
     m_pigeon2.reset();
+  }
+
+  public void setHeading(int angle) {
+    int flipAngle = 0;
+    if (angle > 0) {
+      flipAngle = 360 - angle;
+    }
+    // Reset the odometry if you're trying to use path finding during teleop
+    // resetOdometry(
+    //     new Pose2d(
+    //         getPose().getTranslation(), // Keep current X, Y
+    //         new Rotation2d(flipAngle)   // Reset Theta to angle
+    //     )
+    // )
+    m_gyro.setGyroAngleZ(flipAngle);
+    m_pigeon2.setYaw(flipAngle);
   }
 
   /**

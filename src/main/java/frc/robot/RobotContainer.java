@@ -20,6 +20,7 @@ import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.RunCommand;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
+import edu.wpi.first.wpilibj2.command.button.POVButton;
 
 /*
  * This class is where the bulk of the robot should be declared.  Since Command-based is a
@@ -92,6 +93,27 @@ public class RobotContainer {
         new JoystickButton(m_driverController, XboxController.Button.kStart.value)
                 .onTrue(new InstantCommand(
                         () -> m_robotDrive.zeroHeading(),
+                        m_robotDrive));
+
+        // D-Pad -> UP
+        new POVButton(m_driverController, 0)
+                .onTrue(new InstantCommand(
+                        () -> m_robotDrive.setHeading(0),
+                        m_robotDrive));
+        // D-Pad -> RIGHT
+        new POVButton(m_driverController, 90)
+                .onTrue(new InstantCommand(
+                        () -> m_robotDrive.setHeading(90),
+                        m_robotDrive));
+        // D-Pad -> DOWN
+        new POVButton(m_driverController, 180)
+                .onTrue(new InstantCommand(
+                        () -> m_robotDrive.setHeading(180),
+                        m_robotDrive));
+        // D-Pad -> LEFT
+        new POVButton(m_driverController, 270)
+                .onTrue(new InstantCommand(
+                        () -> m_robotDrive.setHeading(270),
                         m_robotDrive));
 
         // Right Trigger -> Run fuel intake in reverse
