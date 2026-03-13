@@ -34,7 +34,7 @@ public class SlapperSubsystem extends SubsystemBase {
   }
 
   public void retract() {
-    m_slapperMotor.set(-0.5);
+    m_slapperMotor.set(-0.1);
   }
 
   public void stop() {
