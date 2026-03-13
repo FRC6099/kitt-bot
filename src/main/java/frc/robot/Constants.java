@@ -25,7 +25,7 @@ public final class Constants {
   public static final class DriveConstants {
     // Driving Parameters - Note that these are not the maximum capable speeds of
     // the robot, rather the allowed maximum speeds
-    public static final double kMaxSpeedMetersPerSecond = 1.;
+    public static final double kMaxSpeedMetersPerSecond = 2.0;
     public static final double kMaxAngularSpeed = 1 * Math.PI; // radians per second
 
     // Chassis configuration
@@ -84,7 +84,7 @@ public final class Constants {
     }
 
     public static final class FlywheelSetpoints {
-      public static final double kShootRpm = 500;
+      public static final double kShootRpm = 2400;
       public static final double kVelocityTolerance = 100;
     }
   }
@@ -96,7 +96,7 @@ public final class Constants {
 
   public static final class NeoMotorConstants {
     public static final double kFreeSpeedRpm = 5676;
-    public static final double kVortexKv = 565; // rpm/V
+    public static final double kVortexKv = 5000; //565; // rpm/V
   }
 
   public static final class ModuleConstants {
