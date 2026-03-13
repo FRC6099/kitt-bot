@@ -84,14 +84,14 @@ public final class Constants {
     }
 
     public static final class FlywheelSetpoints {
-      public static final double kShootRpm = 5000;
+      public static final double kShootRpm = 500;
       public static final double kVelocityTolerance = 100;
     }
   }
 
   public static final class SlapperSubsystemConstants {
     public static final int kSlapperMotorCanId = 16;
-    public static double kSlapperSpeed = 0.3;
+    public static double kSlapperSpeed = 0.5;
   }
 
   public static final class NeoMotorConstants {

@@ -30,11 +30,11 @@ public class SlapperSubsystem extends SubsystemBase {
   }
 
   public void extend() {
-    m_slapperMotor.set(Constants.SlapperSubsystemConstants.kSlapperSpeed);
+    m_slapperMotor.set(.1);
   }
 
   public void retract() {
-    m_slapperMotor.set(-1.0 * Constants.SlapperSubsystemConstants.kSlapperSpeed);
+    m_slapperMotor.set(-1.0);
   }
 
   public void stop() {

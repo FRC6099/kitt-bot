@@ -1,64 +1,79 @@
 <xml version="1.0">
 <dashboard>
 	<widget field="Intake | Intake | Applied Output" type="Number" class="edu.wpi.first.smartdashboard.gui.elements.TextBox">
-		<location x="271" y="198"/>
+		<location x="12" y="198"/>
 	</widget>
 	<widget field="Scheduler" type="Scheduler" class="edu.wpi.first.smartdashboard.gui.elements.Scheduler">
 		<location x="0" y="5"/>
 	</widget>
 	<widget field="SANITY" type="Number" class="edu.wpi.first.smartdashboard.gui.elements.TextBox">
-		<location x="280" y="5"/>
+		<location x="19" y="40"/>
 	</widget>
 	<widget field="Bat Voltage" type="Number" class="edu.wpi.first.smartdashboard.gui.elements.TextBox">
-		<location x="280" y="35"/>
+		<location x="16" y="73"/>
 	</widget>
 	<widget field="ShooterSubsystem" type="Subsystem" class="edu.wpi.first.smartdashboard.gui.elements.Subsystem">
-		<location x="270" y="270"/>
+		<location x="23" y="254"/>
 	</widget>
 	<widget field="Flywheel" type="Command" class="edu.wpi.first.smartdashboard.gui.elements.Command">
-		<location x="265" y="300"/>
+		<location x="144" y="134"/>
 	</widget>
 	<widget field="Feeder" type="Command" class="edu.wpi.first.smartdashboard.gui.elements.Command">
-		<location x="400" y="300"/>
+		<location x="145" y="167"/>
 	</widget>
 	<widget field="Shooter | Feeder | Applied Output" type="Number" class="edu.wpi.first.smartdashboard.gui.elements.TextBox">
-		<location x="270" y="330"/>
+		<location x="29" y="281"/>
 	</widget>
 	<widget field="Shooter | Flywheel | Target Velocity" type="Number" class="edu.wpi.first.smartdashboard.gui.elements.TextBox">
-		<location x="270" y="360"/>
+		<location x="20" y="320"/>
 	</widget>
 	<widget field="Shooter | Flywheel | Actual Velocity" type="Number" class="edu.wpi.first.smartdashboard.gui.elements.TextBox">
-		<location x="270" y="390"/>
+		<location x="27" y="345"/>
 	</widget>
 	<widget field="Shooter | Flywheel | Current" type="Number" class="edu.wpi.first.smartdashboard.gui.elements.TextBox">
-		<location x="270" y="420"/>
+		<location x="24" y="370"/>
 	</widget>
 	<widget field="Shooter | Flywheel | Applied Output" type="Number" class="edu.wpi.first.smartdashboard.gui.elements.TextBox">
-		<location x="270" y="450"/>
+		<location x="17" y="398"/>
 	</widget>
 	<widget field="Shooter | Flywheel Follower | Current" type="Number" class="edu.wpi.first.smartdashboard.gui.elements.TextBox">
-		<location x="270" y="480"/>
+		<location x="121" y="12"/>
 	</widget>
 	<widget field="Shooter | Flywheel Follower | Applied Output" type="Number" class="edu.wpi.first.smartdashboard.gui.elements.TextBox">
-		<location x="270" y="510"/>
+		<location x="7" y="499"/>
 	</widget>
 	<widget field="IntakeSubsystem" type="Subsystem" class="edu.wpi.first.smartdashboard.gui.elements.Subsystem">
-		<location x="270" y="100"/>
+		<location x="12" y="108"/>
 	</widget>
 	<widget field="Intake" type="Command" class="edu.wpi.first.smartdashboard.gui.elements.Command">
-		<location x="265" y="130"/>
+		<location x="28" y="134"/>
 	</widget>
 	<widget field="Extake" type="Command" class="edu.wpi.first.smartdashboard.gui.elements.Command">
-		<location x="265" y="160"/>
+		<location x="15" y="167"/>
 	</widget>
 	<widget field="Intake | Conveyor | Applied Output" type="Number" class="edu.wpi.first.smartdashboard.gui.elements.TextBox">
-		<location x="270" y="220"/>
+		<location x="-3" y="221"/>
 	</widget>
 	<widget field="Is Flywheel Stopped" type="Boolean" class="edu.wpi.first.smartdashboard.gui.elements.TextBox">
-		<location x="58" y="450"/>
+		<location x="27" y="428"/>
 	</widget>
 	<widget field="Is Flywheel Spinning" type="Boolean" class="edu.wpi.first.smartdashboard.gui.elements.TextBox">
-		<location x="59" y="480"/>
+		<location x="21" y="464"/>
+	</widget>
+	<static-widget class="edu.wpi.first.smartdashboard.gui.elements.CameraServerViewer">
+		<location x="1054" y="20"/>
+		<width>427</width>
+		<height>334</height>
+		<property name="Camera Choice" value="USB Camera 1"/>
+	</static-widget>
+	<static-widget class="edu.wpi.first.smartdashboard.gui.elements.CameraServerViewer">
+		<location x="341" y="36"/>
+		<width>771</width>
+		<height>487</height>
+		<property name="Camera Choice" value=""/>
+	</static-widget>
+	<widget field="Autonomous Options" type="String Chooser" class="edu.wpi.first.smartdashboard.gui.elements.Chooser">
+		<location x="15" y="9"/>
 	</widget>
 </dashboard>
 <live-window>
