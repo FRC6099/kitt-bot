@@ -87,8 +87,8 @@ public final class Configs {
       slapperConfig
           .inverted(false)
           .idleMode(IdleMode.kBrake)
-          .openLoopRampRate(0.5)
-          .smartCurrentLimit(15);
+          .openLoopRampRate(1.0)
+          .smartCurrentLimit(25);
     }
   }
 
