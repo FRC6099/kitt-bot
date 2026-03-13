@@ -146,6 +146,6 @@ public class RobotContainer {
      * @return the command to run in autonomous
      */
     public Command getAutonomousCommand() {
-        return Autos.exampleAuto(m_robotDrive);
+        return Autos.exampleAuto(m_robotDrive, m_shooter, m_intake);
     }
 }
