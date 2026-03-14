@@ -7,7 +7,7 @@ package frc.robot;
 import edu.wpi.first.math.MathUtil;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import edu.wpi.first.wpilibj.PS4Controller.Button;
+// import edu.wpi.first.wpilibj.PS4Controller.Button;
 import edu.wpi.first.wpilibj.RobotController;
 import frc.robot.Constants.OIConstants;
 import frc.robot.commands.Autos;
@@ -83,7 +83,7 @@ public class RobotContainer {
      * {@link JoystickButton}.
      */
     private void configureButtonBindings() {
-        new JoystickButton(m_driverController, XboxController.Button.kR1.value)
+        new JoystickButton(m_driverController, XboxController.Button.kRightBumper.value)
                 .whileTrue(new RunCommand(
                         () -> m_robotDrive.setX(),
                         m_robotDrive));

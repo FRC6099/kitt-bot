@@ -39,7 +39,8 @@ public class Robot extends TimedRobot {
 
   private UsbCamera startCamera() {
     try {
-      UsbCamera camera1 = CameraServer.startAutomaticCapture();
+      // UsbCamera camera1 = CameraServer.startAutomaticCapture();
+      camera1 = CameraServer.startAutomaticCapture();
       camera1.setConnectionStrategy(ConnectionStrategy.kKeepOpen);
       camera1.setVideoMode(PixelFormat.kMJPEG, 120, 90, 15);
       camera1.setExposureManual(40);
