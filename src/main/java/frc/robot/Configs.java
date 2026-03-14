@@ -40,7 +40,7 @@ public final class Configs {
     static {
       // Configure basic setting of the flywheel motors
       flywheelConfig
-          .inverted(false)
+          .inverted(true)
           .idleMode(IdleMode.kCoast)
           .closedLoopRampRate(1.0)
           .openLoopRampRate(1.0)
@@ -58,7 +58,7 @@ public final class Configs {
 
       flywheelConfig.closedLoop.maxMotion
           // Set MAXMotion parameters for MAXMotion Velocity control
-          .cruiseVelocity(5000)
+          .cruiseVelocity(100)
           .maxAcceleration(10000)
           .allowedProfileError(1);
 
@@ -68,8 +68,8 @@ public final class Configs {
       flywheelConfig.closedLoop.feedForward.kV(nominalVoltage / Constants.NeoMotorConstants.kVortexKv);
 
       // Configure the follower flywheel motor to follow the main flywheel motor
-      flywheelFollowerConfig.apply(flywheelConfig)
-          .follow(Constants.ShooterSubsystemConstants.kFlywheelMotorCanId, true);
+      // flywheelFollowerConfig.apply(flywheelConfig)
+      //     .follow(Constants.ShooterSubsystemConstants.kFlywheelMotorCanId, true);
 
       // Configure basic setting of the feeder motor
       feederConfig

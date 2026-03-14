@@ -61,12 +61,6 @@
 		<location x="21" y="464"/>
 	</widget>
 	<static-widget class="edu.wpi.first.smartdashboard.gui.elements.CameraServerViewer">
-		<location x="1054" y="20"/>
-		<width>427</width>
-		<height>334</height>
-		<property name="Camera Choice" value="USB Camera 1"/>
-	</static-widget>
-	<static-widget class="edu.wpi.first.smartdashboard.gui.elements.CameraServerViewer">
 		<location x="341" y="36"/>
 		<width>771</width>
 		<height>487</height>
