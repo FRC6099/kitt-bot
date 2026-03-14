@@ -44,7 +44,7 @@ public final class Configs {
           .idleMode(IdleMode.kCoast)
           .closedLoopRampRate(1.0)
           .openLoopRampRate(1.0)
-          .smartCurrentLimit(20);
+          .smartCurrentLimit(80);
 
       /*
        * Configure the closed loop controller. We want to make sure we set the
@@ -58,8 +58,8 @@ public final class Configs {
 
       flywheelConfig.closedLoop.maxMotion
           // Set MAXMotion parameters for MAXMotion Velocity control
-          .cruiseVelocity(2500)
-          .maxAcceleration(1000)
+          .cruiseVelocity(100)
+          .maxAcceleration(10000)
           .allowedProfileError(1);
 
       // Constants.NeoMotorConstants.kVortexKv is in rpm/V. feedforward.kV is in V/rpm
