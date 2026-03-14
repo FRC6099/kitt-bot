@@ -66,12 +66,12 @@ public final class Autos {
 
         // Run path following command, then stop at the end.
         return swerveControllerCommand
-                .andThen(() -> drive.drive(0, 0, 0, false))
-                .andThen(
-                        shooter.runShooterCommand()
-                                .alongWith(intake.runIntakeCommand())
-                                .withTimeout(5.0)
-                );
+                .andThen(() -> drive.drive(0, 0, 0, false), drive);
+                // .andThen(
+                //         shooter.runShooterCommand()
+                //                 .alongWith(intake.runIntakeCommand())
+                //                 .withTimeout(5.0)
+                // );
   }
 
   private Autos() {
