@@ -91,7 +91,7 @@ public final class Constants {
 
   public static final class SlapperSubsystemConstants {
     public static final int kSlapperMotorCanId = 16;
-    public static double kSlapperSpeed = 0.5;
+    public static double kSlapperSpeed = 0.5;  //Does not seem to be used - Tim
   }
 
   public static final class NeoMotorConstants {
