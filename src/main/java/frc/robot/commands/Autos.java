@@ -32,16 +32,17 @@ public final class Autos {
                 AutoConstants.kMaxSpeedMetersPerSecond,
                 AutoConstants.kMaxAccelerationMetersPerSecondSquared)
                 // Add kinematics to ensure max speed is actually obeyed
-                .setKinematics(DriveConstants.kDriveKinematics);
+                .setKinematics(DriveConstants.kDriveKinematics)
+                .setReversed(true);
 
         // An example trajectory to follow. All units in meters.
         Trajectory exampleTrajectory = TrajectoryGenerator.generateTrajectory(
                 // Start at the origin facing the +X direction
-                new Pose2d(0, 0, new Rotation2d(0)),
+                new Pose2d(0, 0, Rotation2d.fromDegrees(0)),
                 // Pass through these two interior waypoints, making an 's' curve path
-                List.of(new Translation2d(-0.762, 0)),
+                List.of(),
                 // End 3 meters straight ahead of where we started, facing forward
-                new Pose2d(-1.0, 0, new Rotation2d(0)),
+                new Pose2d(-1.0, 0, Rotation2d.fromDegrees(0)),
                 config);
 
         var thetaController = new ProfiledPIDController(
@@ -66,12 +67,12 @@ public final class Autos {
 
         // Run path following command, then stop at the end.
         return swerveControllerCommand
-                .andThen(() -> drive.drive(0, 0, 0, false), drive);
-                // .andThen(
-                //         shooter.runShooterCommand()
-                //                 .alongWith(intake.runIntakeCommand())
-                //                 .withTimeout(5.0)
-                // );
+                .andThen(() -> drive.drive(0, 0, 0, false), drive)
+                .andThen(
+                        shooter.runShooterCommand()
+                                .alongWith(intake.runIntakeCommand())
+                                .withTimeout(5.0)
+                );
   }
 
   private Autos() {
