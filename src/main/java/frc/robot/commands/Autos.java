@@ -16,6 +16,7 @@ import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.SwerveControllerCommand;
 import frc.robot.Constants.AutoConstants;
 import frc.robot.Constants.DriveConstants;
+import frc.robot.enums.RobotDistance;
 import frc.robot.subsystems.DriveSubsystem;
 import frc.robot.subsystems.IntakeSubsystem;
 import frc.robot.subsystems.ShooterSubsystem;
@@ -65,7 +66,7 @@ public final class Autos {
         return swerveControllerCommand
                 .andThen(() -> drive.drive(0, 0, 0, false), drive)
                 .andThen(
-                        shooter.runShooterCommand()
+                        shooter.runShooterCommand(RobotDistance.MIDDLE)
                                 .alongWith(intake.runIntakeCommand())
                                 .withTimeout(5.0)
                 );

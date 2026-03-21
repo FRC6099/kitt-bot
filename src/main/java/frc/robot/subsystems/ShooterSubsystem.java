@@ -20,6 +20,7 @@ import edu.wpi.first.wpilibj2.command.button.Trigger;
 import frc.robot.Configs;
 import frc.robot.Constants.ShooterSubsystemConstants.FeederSetpoints;
 import frc.robot.Constants.ShooterSubsystemConstants.FlywheelSetpoints;
+import frc.robot.enums.RobotDistance;
 import frc.robot.Constants.ShooterSubsystemConstants;
 
 public class ShooterSubsystem extends SubsystemBase {
@@ -91,6 +92,11 @@ public class ShooterSubsystem extends SubsystemBase {
       () -> isFlywheelAt(-FlywheelSetpoints.kShootRpm) || flywheelEncoder.getVelocity() < -FlywheelSetpoints.kShootRpm
   );
 
+  public Trigger isFlywheelspinningAt(double shooterSpeed) {
+    return new Trigger(
+      () -> isFlywheelAt(shooterSpeed) || flywheelEncoder.getVelocity() > shooterSpeed
+    );
+  }
   /** 
    * Trigger: Is the flywheel stopped?
    */
@@ -158,6 +164,34 @@ public class ShooterSubsystem extends SubsystemBase {
           feederMotor.stopMotor();
         })
     ).withName("Shooting");
+  }
+  
+  /**
+   * Meta-command to operate the shooter. The Flywheel starts spinning up and when it reaches
+   * the desired speed it starts the Feeder.
+   */
+  public Command runShooterCommand(double shooterSpeed) {
+    return this.startEnd(
+      () -> this.setFlywheelVelocity(shooterSpeed),
+      () -> flywheelMotor.stopMotor()
+    ).until(isFlywheelspinningAt(shooterSpeed)).andThen(
+      this.startEnd(
+        () -> {
+          this.setFlywheelVelocity(shooterSpeed);
+          this.setFeederPower(FeederSetpoints.kFeed);
+        }, () -> {
+          flywheelMotor.stopMotor();
+          feederMotor.stopMotor();
+        })
+    ).withName("Shooting");
+  }
+  
+  /**
+   * Meta-command to operate the shooter. The Flywheel starts spinning up and when it reaches
+   * the desired speed it starts the Feeder.
+   */
+  public Command runShooterCommand(RobotDistance robotDistance) {
+    return runShooterCommand(robotDistance.getShooterSpeed());
   }
 
   @Override
