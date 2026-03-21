@@ -30,12 +30,12 @@ public class SlapperSubsystem extends SubsystemBase {
   }
 
   public void extend() {
-    m_slapperMotor.set(0.6);  //Not using the defined constant for some reason - Tim
+    m_slapperMotor.set(0.1);  //Not using the defined constant for some reason - Tim
     // m_slapperMotor.set(Constants.SlapperSubsystemConstants.kSlapperSpeed);
   }
 
   public void retract() {
-    m_slapperMotor.set(-0.6);  //Not using the defined constant for some reason - Tim
+    m_slapperMotor.set(-0.1);  //Not using the defined constant for some reason - Tim
     // m_slapperMotor.set(-Constants.SlapperSubsystemConstants.kSlapperSpeed);
   }
 
