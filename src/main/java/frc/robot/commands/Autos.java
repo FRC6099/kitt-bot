@@ -39,7 +39,7 @@ public final class Autos {
                 // Pass through these two interior waypoints, making an 's' curve path
                 List.of(),
                 // End 3 meters straight ahead of where we started, facing forward
-                new Pose2d(-1.0, 0, Rotation2d.fromDegrees(0)),
+                new Pose2d(-0.15, 0, Rotation2d.fromDegrees(0)),
                 config);
 
         var thetaController = new ProfiledPIDController(
@@ -66,9 +66,9 @@ public final class Autos {
         return swerveControllerCommand
                 .andThen(() -> drive.drive(0, 0, 0, false), drive)
                 .andThen(
-                        shooter.runShooterCommand(RobotDistance.MIDDLE)
+                        shooter.runShooterCommand(RobotDistance.ADJACENT)
                                 .alongWith(intake.runIntakeCommand())
-                                .withTimeout(5.0)
+                                .withTimeout(10.0)
                 );
   }
 

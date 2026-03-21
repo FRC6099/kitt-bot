@@ -1,7 +1,7 @@
 package frc.robot.enums;
 
 public enum RobotDistance {
-    ADJACENT(300.0, 0.0),
+    ADJACENT(345.0, 0.0),
     MIDDLE(400.0, 1.0),
     FAR(450.0, 3.0);
 

@@ -86,7 +86,7 @@ public final class Constants {
 
     public static final class FlywheelSetpoints {
       public static final double kShootRpm = RobotDistance.ADJACENT.getShooterSpeed();
-      public static final double kVelocityTolerance = 100;
+      public static final double kVelocityTolerance = 50;
     }
   }
 
