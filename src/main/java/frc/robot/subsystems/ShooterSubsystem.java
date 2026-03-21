@@ -13,6 +13,7 @@ import com.revrobotics.spark.SparkLowLevel.MotorType;
 import com.revrobotics.spark.SparkMax;
 
 import edu.wpi.first.math.MathUtil;
+import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
@@ -192,6 +193,14 @@ public class ShooterSubsystem extends SubsystemBase {
    */
   public Command runShooterCommand(RobotDistance robotDistance) {
     return runShooterCommand(robotDistance.getShooterSpeed());
+  }
+  
+  /**
+   * Meta-command to operate the shooter. The Flywheel starts spinning up and when it reaches
+   * the desired speed it starts the Feeder.
+   */
+  public Command runShooterCommand(SendableChooser<RobotDistance> chooser) {
+    return runShooterCommand(chooser.getSelected());
   }
 
   @Override
