@@ -4,12 +4,19 @@
 
 package frc.robot;
 
+import com.pathplanner.lib.auto.AutoBuilder;
+import com.pathplanner.lib.auto.NamedCommands;
+import com.pathplanner.lib.config.PIDConstants;
+import com.pathplanner.lib.config.RobotConfig;
+import com.pathplanner.lib.controllers.PPHolonomicDriveController;
+
 import edu.wpi.first.math.MathUtil;
 import edu.wpi.first.wpilibj.XboxController;
+import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.RobotController;
 import frc.robot.Constants.OIConstants;
-import frc.robot.commands.Autos;
 import frc.robot.enums.RobotDistance;
 import frc.robot.subsystems.DriveSubsystem;
 import frc.robot.subsystems.IntakeSubsystem;
@@ -38,6 +45,8 @@ public class RobotContainer {
     XboxController m_driverController = new XboxController(OIConstants.kDriverControllerPort);
     private final CommandXboxController m_operatorController =
       new CommandXboxController(OIConstants.kOperatorControllerPort);
+
+    private final SendableChooser<Command> autoChooser;
 
 
     /**
@@ -71,6 +80,42 @@ public class RobotContainer {
         SmartDashboard.putData("Feeder", m_shooter.runFeederCommand().withName("Shooter - Feeding and Shooting"));
         SmartDashboard.putData("Flywheel", m_shooter.runFlywheelCommand().withName("Shooter - Spinning up Flywheel"));
 
+        NamedCommands.registerCommand("runShooter",m_shooter.runShooterCommand()
+                                .alongWith(m_intake.runIntakeCommand())
+                                .withTimeout(5.0));
+        configureAutoBuilder();
+        autoChooser = AutoBuilder.buildAutoChooser();
+        SmartDashboard.putData("Auto Chooser", autoChooser);
+    }
+
+    private void configureAutoBuilder() {
+        RobotConfig config;
+        try{
+            config = RobotConfig.fromGUISettings();
+
+            AutoBuilder.configure(
+                m_robotDrive::getPose,
+                m_robotDrive::resetOdometry,
+                m_robotDrive::getRobotRelativeSpeeds,
+                (speeds, feedForwards) -> m_robotDrive.driveRobotRelative(speeds),
+                new PPHolonomicDriveController(
+                        new PIDConstants(5.0, 0.0, 0.0), 
+                        new PIDConstants(5.0, 0.0, 0.0)
+                ),
+                config,
+                () -> {
+                        var alliance = DriverStation.getAlliance();
+                        if (alliance.isPresent()) {
+                                return alliance.get() == DriverStation.Alliance.Red;
+                        }
+                        return false;
+                },
+                m_robotDrive
+            );
+        } catch (Exception e) {
+            // Handle exception as needed
+            e.printStackTrace();
+        }
     }
 
     /**
@@ -123,9 +168,6 @@ public class RobotContainer {
      * @return the command to run in autonomous
      */
     public Command getAutonomousCommand() {
-        return Autos.exampleAuto(m_robotDrive, m_shooter, m_intake);
-        // return m_shooter.runShooterCommand(RobotDistance.ADJACENT)
-        //                         .alongWith(m_intake.runIntakeCommand())
-        //                         .withTimeout(10.0);
+        return autoChooser.getSelected();
     }
 }
