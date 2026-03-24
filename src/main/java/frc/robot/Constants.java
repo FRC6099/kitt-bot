@@ -8,6 +8,7 @@ import edu.wpi.first.math.geometry.Translation2d;
 import edu.wpi.first.math.kinematics.SwerveDriveKinematics;
 import edu.wpi.first.math.trajectory.TrapezoidProfile;
 import edu.wpi.first.math.util.Units;
+import frc.robot.enums.RobotDistance;
 
 /**
  * The Constants class provides a convenient place for teams to hold robot-wide
@@ -84,8 +85,8 @@ public final class Constants {
     }
 
     public static final class FlywheelSetpoints {
-      public static final double kShootRpm = 400;
-      public static final double kVelocityTolerance = 100;
+      public static final double kShootRpm = RobotDistance.ADJACENT.getShooterSpeed();
+      public static final double kVelocityTolerance = 50;
     }
   }
 

@@ -17,6 +17,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.RobotController;
 import frc.robot.Constants.OIConstants;
+import frc.robot.enums.RobotDistance;
 import frc.robot.subsystems.DriveSubsystem;
 import frc.robot.subsystems.IntakeSubsystem;
 import frc.robot.subsystems.ShooterSubsystem;
@@ -158,7 +159,7 @@ public class RobotContainer {
                 .whileTrue(new RunCommand(() -> m_slapper.extend(), m_slapper));
 
         // Y Button -> Run intake and run the shooter flywheel and feeder
-        m_operatorController.y().whileTrue(m_shooter.runShooterCommand().alongWith(m_intake.runIntakeCommand()));
+        m_operatorController.y().whileTrue(m_shooter.runShooterCommand(RobotDistance.ADJACENT).alongWith(m_intake.runIntakeCommand()));
     }
 
     /**
