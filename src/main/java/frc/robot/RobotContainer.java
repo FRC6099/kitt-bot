@@ -53,7 +53,7 @@ public class RobotContainer {
         teleopDistanceChooser.addOption("Middle", RobotDistance.MIDDLE);
         teleopDistanceChooser.addOption("Far", RobotDistance.FAR);
         SmartDashboard.putData("Teleop Shooter Distance", teleopDistanceChooser);
-        
+
         configureButtonBindings();
 
         // Configure default commands
@@ -126,7 +126,7 @@ public class RobotContainer {
         m_operatorController.y()
                 .whileTrue(
                         m_shooter.runShooterCommand(teleopDistanceChooser)
-                                .alongWith(m_intake.runIntakeCommand()));
+                                .alongWith(m_intake.runConveyorCommand()));
     }
 
     /**

@@ -69,9 +69,20 @@ public class IntakeSubsystem extends SubsystemBase {
     return this.startEnd(
         () -> {
           this.setIntakePower(IntakeSetpoints.kIntake);
-          this.setConveyorPower(ConveyorSetpoints.kIntake);
         }, () -> {
           this.setIntakePower(0.0);
+        }).withName("Intaking");
+  }
+
+    /**
+   * Command to run the conveyor motor. When the command is interrupted, e.g. the button is released,
+   * the motors will stop.
+   */
+  public Command runConveyorCommand() {
+    return this.startEnd(
+        () -> {
+          this.setConveyorPower(ConveyorSetpoints.kIntake);
+        }, () -> {
           this.setConveyorPower(0.0);
         }).withName("Intaking");
   }
@@ -84,10 +95,8 @@ public class IntakeSubsystem extends SubsystemBase {
     return this.startEnd(
         () -> {
           this.setIntakePower(IntakeSetpoints.kExtake);
-          this.setConveyorPower(ConveyorSetpoints.kExtake);
         }, () -> {
           this.setIntakePower(0.0);
-          this.setConveyorPower(0.0);
         }).withName("Extaking");
   }
 
