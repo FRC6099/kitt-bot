@@ -48,6 +48,12 @@ public class RobotContainer {
      */
     public RobotContainer() {
         // Configure the button bindings
+
+        teleopDistanceChooser.setDefaultOption("Adjacent", RobotDistance.ADJACENT);
+        teleopDistanceChooser.addOption("Middle", RobotDistance.MIDDLE);
+        teleopDistanceChooser.addOption("Far", RobotDistance.FAR);
+        SmartDashboard.putData("Teleop Shooter Distance", teleopDistanceChooser);
+        
         configureButtonBindings();
 
         // Configure default commands
@@ -73,11 +79,6 @@ public class RobotContainer {
 
         SmartDashboard.putData("Feeder", m_shooter.runFeederCommand().withName("Shooter - Feeding and Shooting"));
         SmartDashboard.putData("Flywheel", m_shooter.runFlywheelCommand().withName("Shooter - Spinning up Flywheel"));
-
-        teleopDistanceChooser.setDefaultOption("Adjacent", RobotDistance.ADJACENT);
-        teleopDistanceChooser.addOption("Middle", RobotDistance.MIDDLE);
-        teleopDistanceChooser.addOption("Far", RobotDistance.FAR);
-        SmartDashboard.putData("Teleop Shooter Distance", teleopDistanceChooser);
 
     }
 
