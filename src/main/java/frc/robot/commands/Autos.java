@@ -67,7 +67,7 @@ public final class Autos {
                 .andThen(() -> drive.drive(0, 0, 0, false), drive)
                 .andThen(
                         shooter.runShooterCommand(RobotDistance.ADJACENT)
-                                .alongWith(intake.runIntakeCommand())
+                                .alongWith(intake.runConveyorCommand())
                                 .withTimeout(10.0)
                 );
   }
