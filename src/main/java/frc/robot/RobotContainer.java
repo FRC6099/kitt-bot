@@ -6,6 +6,7 @@ package frc.robot;
 
 import edu.wpi.first.math.MathUtil;
 import edu.wpi.first.wpilibj.XboxController;
+import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj.RobotController;
 import frc.robot.Constants.OIConstants;
@@ -39,12 +40,20 @@ public class RobotContainer {
     private final CommandXboxController m_operatorController =
       new CommandXboxController(OIConstants.kOperatorControllerPort);
 
+    private final SendableChooser<RobotDistance> teleopDistanceChooser = new SendableChooser<>();
+    
 
     /**
      * The container for the robot. Contains subsystems, OI devices, and commands.
      */
     public RobotContainer() {
         // Configure the button bindings
+
+        teleopDistanceChooser.setDefaultOption("Adjacent", RobotDistance.ADJACENT);
+        teleopDistanceChooser.addOption("Middle", RobotDistance.MIDDLE);
+        teleopDistanceChooser.addOption("Far", RobotDistance.FAR);
+        SmartDashboard.putData("Teleop Shooter Distance", teleopDistanceChooser);
+
         configureButtonBindings();
 
         // Configure default commands
@@ -114,7 +123,10 @@ public class RobotContainer {
                 .whileTrue(new RunCommand(() -> m_slapper.extend(), m_slapper));
 
         // Y Button -> Run intake and run the shooter flywheel and feeder
-        m_operatorController.y().whileTrue(m_shooter.runShooterCommand(RobotDistance.ADJACENT).alongWith(m_intake.runIntakeCommand()));
+        m_operatorController.y()
+                .whileTrue(
+                        m_shooter.runShooterCommand(teleopDistanceChooser)
+                                .alongWith(m_intake.runConveyorCommand()));
     }
 
     /**
